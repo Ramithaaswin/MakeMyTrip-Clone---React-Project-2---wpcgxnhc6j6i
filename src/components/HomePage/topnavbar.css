@@ -1,11 +1,13 @@
+
 .topnavbarmaindiv{
     /* border: 2px solid red; */
-    height: 4vh;
+    height: 7vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
     color: white;
+    width: 100%;
 }
 .whitelogoimage{
     height: 36px;
@@ -19,10 +21,29 @@
 }
 .superoffers{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* border: 2px solid green; */
     align-items: flex-start;
     justify-content: flex-start;
+}
+.superofferlogo{
+    background-image: url("../images/headerimages.png");
+    width: 25px;
+    height: 25px;
+    background-position: -225px -326px;
+    background-size: 260px 400px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: 900;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.superofferdescription{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .superoffers h3{
     margin: 0;
@@ -35,10 +56,23 @@
 }
 .mybiz{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* border: 2px solid green; */
     align-items: flex-start;
     justify-content: flex-start;
+}
+.mybizlogo{
+    background-image: url("../images/alllogo.png");
+    width: 44px;
+    height: 22px;
+    background-position: -98px -491px;
+    background-size: 200px 700px;
+    margin-right: 10px;
+}
+.mybizdescription{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .mybiz h3{
     margin: 0;
@@ -51,10 +85,23 @@
 }
 .mytrips{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* border: 2px solid green; */
     align-items: flex-start;
     justify-content: flex-start;
+}
+.mytripslogo{
+    background-image: url("../images/alllogo.png");
+    width: 16px;
+    height: 25px;
+    background-position: -122px -30px;
+    background-size: 200px 700px;
+    margin-right: 10px;
+}
+.mytripsdescription{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .mytrips h3{
     margin: 0;
@@ -79,10 +126,20 @@
     margin-right: 0;
     width: 213px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-size: 11px;
     font-weight: 900;
+}
+.loginlogo{
+    background-image: url("../images/alllogo.png");
+    background-position: -67px -489px;
+    height: 22px;
+    width: 23px;
+    background-size: 200px 700px;
+}
+.loginicon{
+    cursor: pointer;
 }
 .languageselector{
     border-radius: 4px;
@@ -90,11 +147,18 @@
     margin-right: 0;
     width: 126px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-size: 11px;
     font-weight: 900;
     background-color: hsla(0,0%,100%,.15);
     border: 0;
     padding: 0;
+}
+.flaglogo{
+    background-image: url("../images/flag.png");
+    background-position: 0 0;
+    height: 12px;
+    width: 15px;
+    background-size: 16px 74px;
 }

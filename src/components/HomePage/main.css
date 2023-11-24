@@ -1,4 +1,6 @@
 .mainpage{
-    background: url(../images/bgimage.jpeg);
-    height: 60vh;
+    background-image: linear-gradient(#051225,#0a4281);
+    height: 70vh;
+    display: flex;
+    justify-content: center;
 }

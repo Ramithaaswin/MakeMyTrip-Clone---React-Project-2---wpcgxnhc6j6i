@@ -1,8 +1,7 @@
 import React from "react";
-import "./footer.css";
+import "./mediacopyright.css";
 import { TfiFacebook } from "react-icons/tfi";
 import { BsTwitter } from "react-icons/bs";
-import { Container } from "@mui/material";
 
 const MediaCopyRight = () => {
   return (
