@@ -5,6 +5,7 @@ import Offers from "../offers/Offers";
 import RecentSearches from "./RecentSearches";
 import Fguidance from "./Fguidance";
 import DownloadApp from "../downloadapp/DownloadApp";
+import ForexWidget from "../forexwidget/ForexWidget";
 
 const FlightwidgetBottom = () => {
   return (
@@ -16,6 +17,7 @@ const FlightwidgetBottom = () => {
       <RecentSearches />
       <Fguidance />
       <DownloadApp />
+      <ForexWidget />
     </div>
   );
 };
