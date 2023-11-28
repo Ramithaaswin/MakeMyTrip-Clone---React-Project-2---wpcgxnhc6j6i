@@ -7,6 +7,7 @@ import HeaderNavbar from "./HeaderNavbar";
 import HotelsWiget from "../Hotelswidget/HotelsWiget";
 import FlightsWidgetMain from "../Flightswidget/FlightsWidgetMain";
 import TrainsWidget from "../Trainswidget/TrainsWidget";
+import FlightwidgetBottom from "../Flightswidget/FlightwidgetBottom";
 TrainsWidget;
 
 const Main = () => {
@@ -15,7 +16,7 @@ const Main = () => {
   const [showTrains, setShowTrains] = useState(false);
   return (
     <>
-      <div className="mainpage">
+      <div className="mainpage-top">
         <Container>
           <TopNavbar />
           <HeaderNavbar
@@ -27,6 +28,9 @@ const Main = () => {
           {showHotel && <HotelsWiget />}
           {showTrains && <TrainsWidget />}
         </Container>
+      </div>
+      <div className="mainpage-bottom">
+        {showFlight && <FlightwidgetBottom />}
       </div>
     </>
   );

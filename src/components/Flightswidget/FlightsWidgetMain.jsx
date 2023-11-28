@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import "./flightwidgetmain.css";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import Searchbutton from "../Searchbutton/Searchbutton";
-import date from "date-and-time";
+import { MdKeyboardDoubleArrowDown } from "react-icons/md";
+import FwChooseOption from "./FwChooseOption";
 
 const FlightsWidgetMain = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -17,7 +18,7 @@ const FlightsWidgetMain = () => {
   };
 
   return (
-    <>
+    <div className="flightwidget">
       <div className="flightwidgetmaindiv">
         <Container>
           <div className="fw-upperdiv">
@@ -162,9 +163,15 @@ const FlightsWidgetMain = () => {
             </div>
           </div>
           <Searchbutton />
+          <div className="fw-exploremore">
+            <MdKeyboardDoubleArrowDown size={20} />
+            <p>Explore More</p>
+            <MdKeyboardDoubleArrowDown size={20} />
+          </div>
+          <FwChooseOption />
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 

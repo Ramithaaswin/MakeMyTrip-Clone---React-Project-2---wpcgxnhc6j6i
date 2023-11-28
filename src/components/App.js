@@ -32,7 +32,6 @@ function App() {
             <Route path="/" exact element={<Main />} />
           </Routes>
         </BrowserRouter>
-
         <MainFooter />
       </div>
     </>
