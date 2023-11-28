@@ -8,6 +8,8 @@ import HotelsWiget from "../Hotelswidget/HotelsWiget";
 import FlightsWidgetMain from "../Flightswidget/FlightsWidgetMain";
 import TrainsWidget from "../Trainswidget/TrainsWidget";
 import FlightwidgetBottom from "../Flightswidget/FlightwidgetBottom";
+import HotelWidgetBottom from "../Hotelswidget/HotelWidgetBottom";
+import TrainWidgetBottom from "../Trainswidget/TrainWidgetBottom";
 TrainsWidget;
 
 const Main = () => {
@@ -31,6 +33,8 @@ const Main = () => {
       </div>
       <div className="mainpage-bottom">
         {showFlight && <FlightwidgetBottom />}
+        {showHotel && <HotelWidgetBottom />}
+        {showTrains && <TrainWidgetBottom />}
       </div>
     </>
   );
