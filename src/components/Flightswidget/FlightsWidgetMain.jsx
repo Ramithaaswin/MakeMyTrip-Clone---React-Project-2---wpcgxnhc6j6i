@@ -5,16 +5,70 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import Searchbutton from "../Searchbutton/Searchbutton";
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 import FwChooseOption from "./FwChooseOption";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const FlightsWidgetMain = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedFaretype, setSelectedFaretype] = useState("");
+  const [showDepartureDate, setShowDepartureDate] = useState(false);
+  const [selectedDepartureDate, setSelectedDepartureDate] = useState(null);
+  const [showReturnDate, setShowReturnDate] = useState(false);
+  const [selectedReturnDate, setSelectedReturnDate] = useState(null);
 
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
   };
+
   const handleFaretypeChange = (e) => {
     setSelectedFaretype(e.target.value);
+  };
+
+  const handleDepartureIconClick = () => {
+    setShowDepartureDate(!showDepartureDate);
+  };
+
+  const handleDepartureDate = (date) => {
+    setSelectedDepartureDate(date);
+    setShowDepartureDate(false);
+
+    const dday = date.getDate();
+    const dmonth = date.toLocaleString("default", { month: "short" });
+    const dyear = date.getFullYear().toString().slice(-2);
+    const ddayName = date.toLocaleDateString("default", { weekday: "long" });
+
+    document.getElementById("dday").innerText = dday;
+    document.getElementById("dmonth").innerText = dmonth;
+    document.getElementById("dyear").innerText = dyear;
+    document.getElementById("ddayName").innerText = ddayName;
+
+    console.log(dday);
+    console.log(dmonth);
+    console.log(dyear);
+  };
+
+  const handleReturnIconClick = () => {
+    setShowReturnDate(!showReturnDate);
+  };
+
+  const handleReturnDate = (date) => {
+    setSelectedReturnDate(date);
+    setShowReturnDate(false);
+
+    const rday = date.getDate();
+    const rmonth = date.toLocaleString("default", { month: "short" });
+    const ryear = date.getFullYear().toString().slice(-2);
+    const rdayName = date.toLocaleDateString("default", { weekday: "long" });
+
+    document.getElementById("rday").innerText = rday;
+    document.getElementById("rmonth").innerText = rmonth;
+    document.getElementById("ryear").innerText = ryear;
+    document.getElementById("rdayName").innerText = rdayName;
+
+    console.log(rday);
+    console.log(rmonth);
+    console.log(ryear);
   };
 
   return (
@@ -67,20 +121,56 @@ const FlightsWidgetMain = () => {
               <p>Bengaluru</p>
               <p>BLR, Bengaluru International Airport</p>
             </div>
+
             <div className="fw-departurediv">
-              <p>Departure</p>
+              <div className="departureheaddiv">
+                <p className="departureheading">Departure</p>
+                <MdKeyboardArrowDown
+                  size={20}
+                  onClick={handleDepartureIconClick}
+                  color="#008cff"
+                />
+              </div>
+              {showDepartureDate && (
+                <DatePicker
+                  selected={selectedDepartureDate}
+                  onChange={handleDepartureDate}
+                  inline
+                />
+              )}
               <p>
-                <span>5</span> Dec23
+                <span id="dday"></span>
+                <span id="dmonth"></span>
+                <span id="dyear"></span>
               </p>
-              <p>Tuesday</p>
+              <p id="ddayName"></p>
             </div>
+
             <div className="fw-returndiv">
-              <p>Return</p>
+              {/* <p>Return</p> */}
+              <div className="returnheaddiv">
+                <p className="returnheading">Return</p>
+                <MdKeyboardArrowDown
+                  size={20}
+                  onClick={handleReturnIconClick}
+                  color="#008cff"
+                />
+              </div>
+              {showReturnDate && (
+                <DatePicker
+                  selected={selectedReturnDate}
+                  onChange={handleReturnDate}
+                  inline
+                />
+              )}
               <p>
-                <span>14</span> Dec23
+                <span id="rday"></span>
+                <span id="rmonth"></span>
+                <span id="ryear"></span>
               </p>
-              <p>Thursday</p>
+              <p id="rdayName"></p>
             </div>
+
             <div className="fw-travellersclassdiv">
               <p>Travellers & class</p>
               <p>

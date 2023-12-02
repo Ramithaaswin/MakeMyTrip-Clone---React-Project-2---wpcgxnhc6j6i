@@ -10,7 +10,7 @@ import TrainsWidget from "../Trainswidget/TrainsWidget";
 import FlightwidgetBottom from "../Flightswidget/FlightwidgetBottom";
 import HotelWidgetBottom from "../Hotelswidget/HotelWidgetBottom";
 import TrainWidgetBottom from "../Trainswidget/TrainWidgetBottom";
-TrainsWidget;
+import MainFooter from "../Footer/MainFooter";
 
 const Main = () => {
   const [showFlight, setShowFlight] = useState(true);
@@ -36,6 +36,7 @@ const Main = () => {
         {showHotel && <HotelWidgetBottom />}
         {showTrains && <TrainWidgetBottom />}
       </div>
+      <MainFooter />
     </>
   );
 };

@@ -1,0 +1,47 @@
+.profiledetailspage{
+    /* border: 2px solid red; */
+    background-color:  #f2f2f2;
+}
+.profilemaincontainer ul{
+    /* border: 2px solid blue; */
+    display: flex;
+    list-style: none;
+    gap: 5px;
+    height: 38px;
+    margin: 20px 0 20px 0 ;
+    padding: 0;
+}
+.profilemaincontainer ul li{
+    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: #4A4A4A;
+    font-size: 16px;
+    font-weight: 900;
+}
+.profilemaincontainer ul li:nth-child(1){
+    padding: 10px 10px 10px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+
+}
+.profiledetailsmaindiv{
+    /* border: 2px solid orange; */
+    display: flex;
+    gap: 40px;
+}
+
+.profileandpagenav{
+    border: 2px solid red;
+    height: 403px;
+    width: 283px;
+}
+.infomaindiv{
+    border: 2px solid blue;
+    height: 1188px;
+    width: 877px;
+}
