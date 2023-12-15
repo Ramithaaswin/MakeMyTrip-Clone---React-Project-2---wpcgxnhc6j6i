@@ -5,6 +5,9 @@ import { Stickyheader } from "./stickeyheader/Stickyheader";
 import { useEffect, useState } from "react";
 import MytripsPage from "./Profilepages/MytripsPage";
 import ProfileDetails from "./Profilepages/ProfileDetails";
+import HotelSearchPage from "./HotelSearchpage/HotelSearchPage";
+import TrainsSearchPage from "./Trainssearchpage/TrainsSearchPage";
+import FlightSearchPage from "./FlightSearch/FlightSearchPage";
 
 function App() {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
@@ -32,6 +35,9 @@ function App() {
             <Route path="/" exact element={<Main />} />
             <Route path="/mytrips" element={<MytripsPage />} />
             <Route path="/myprofile" element={<ProfileDetails />} />
+            <Route path="/hotels" element={<HotelSearchPage />} />
+            <Route path="/trains" element={<TrainsSearchPage />} />
+            <Route path="/flights" element={<FlightSearchPage />}></Route>
           </Routes>
         </BrowserRouter>
       </div>

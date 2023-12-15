@@ -33,6 +33,9 @@
     gap: 10px;
     cursor: pointer;
 }
+.activenav{
+    border-bottom: 3px solid blue;
+}
 .flightimage{
     background-image: url("../images/headerimages.png");
     background-position: -5px -44px;

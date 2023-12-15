@@ -8,12 +8,15 @@ import FwChooseOption from "./FwChooseOption";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 
 const FlightsWidgetMain = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedFaretype, setSelectedFaretype] = useState("");
+
   const [showDepartureDate, setShowDepartureDate] = useState(false);
   const [selectedDepartureDate, setSelectedDepartureDate] = useState(null);
+
   const [showReturnDate, setShowReturnDate] = useState(false);
   const [selectedReturnDate, setSelectedReturnDate] = useState(null);
 
@@ -42,10 +45,6 @@ const FlightsWidgetMain = () => {
     document.getElementById("dmonth").innerText = dmonth;
     document.getElementById("dyear").innerText = dyear;
     document.getElementById("ddayName").innerText = ddayName;
-
-    console.log(dday);
-    console.log(dmonth);
-    console.log(dyear);
   };
 
   const handleReturnIconClick = () => {
@@ -252,7 +251,9 @@ const FlightsWidgetMain = () => {
               </p>
             </div>
           </div>
-          <Searchbutton />
+          <Link to="/flights">
+            <Searchbutton />
+          </Link>
           <div className="fw-exploremore">
             <MdKeyboardDoubleArrowDown size={20} />
             <p>Explore More</p>

@@ -70,9 +70,9 @@ form button{
     display: flex;
     align-items: center;
     justify-content: center; 
-    background-color: rgb(233, 233, 233);
+    background-color: linear-gradient(93deg,#53b2fe,#065af3);
     color: white;
-    opacity: 0.6;
+    /* opacity: 0.6; */
     margin-top: 25px;
     margin-bottom: 25px;
 }

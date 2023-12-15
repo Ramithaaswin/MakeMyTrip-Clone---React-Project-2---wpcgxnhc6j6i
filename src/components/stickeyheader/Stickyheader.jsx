@@ -17,9 +17,11 @@ export const Stickyheader = () => {
   return (
     <div className="stickyheaderpage">
       <div className="stickyheadermaindiv">
+        {/* <Link to="/"> */}
         <div className="bluelogodiv">
           <img src={logoblue} alt="mmtbluelogo" />
         </div>
+        {/* </Link> */}
 
         <div className="stickynavlinks">
           <ul className="navlinkslist">

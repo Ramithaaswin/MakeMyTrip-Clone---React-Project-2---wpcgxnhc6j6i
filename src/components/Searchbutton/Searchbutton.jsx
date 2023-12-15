@@ -4,7 +4,7 @@ import "./searchbutton.css"
 const Searchbutton = () => {
   return (
     <>
-      <button>SEARCH</button>
+      <button className="searchbutton">SEARCH</button>
     </>
   );
 };

@@ -2,14 +2,60 @@ import React, { useState } from "react";
 import "./hotelswidget.css";
 import { Container } from "@mui/material";
 import Searchbutton from "../Searchbutton/Searchbutton";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 
 const HotelsWiget = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [showCheckinDate, setShowCheckinDate] = useState(false);
+  const [selectedCheckinDate, setSelectedCheckinDate] = useState(null);
+  const [showCheckoutDate, setShowCheckoutDate] = useState(false);
+  const [selectedCheckoutDate, setSelectedCheckoutDate] = useState(null);
 
   const handleChange = (e) => {
     setSelectedOption(e.target.value);
   };
-  
+
+  const handleCheckinIconClick = () => {
+    setShowCheckinDate(!showCheckinDate);
+  };
+
+  const handleCheckinDate = (date) => {
+    setSelectedCheckinDate(date);
+    setShowCheckinDate(false);
+
+    const cinday = date.getDate();
+    const cinmonth = date.toLocaleString("default", { month: "short" });
+    const cinyear = date.getFullYear().toString().slice(-2);
+    const cindayName = date.toLocaleDateString("default", { weekday: "long" });
+
+    document.getElementById("cinday").innerText = cinday;
+    document.getElementById("cinmonth").innerText = cinmonth;
+    document.getElementById("cinyear").innerText = cinyear;
+    document.getElementById("cindayName").innerText = cindayName;
+  };
+
+  const handleCheckoutIconClick = () => {
+    setShowCheckoutDate(!showCheckoutDate);
+  };
+
+  const handleCheckoutDate = (date) => {
+    setSelectedCheckoutDate(date);
+    setShowCheckoutDate(false);
+
+    const coutday = date.getDate();
+    const coutmonth = date.toLocaleString("default", { month: "short" });
+    const coutyear = date.getFullYear().toString().slice(-2);
+    const coutdayName = date.toLocaleDateString("default", { weekday: "long" });
+
+    document.getElementById("coutday").innerText = coutday;
+    document.getElementById("coutmonth").innerText = coutmonth;
+    document.getElementById("coutyear").innerText = coutyear;
+    document.getElementById("coutdayName").innerText = coutdayName;
+  };
+
   return (
     <>
       <div className="hotelwidgetmaindiv">
@@ -49,20 +95,55 @@ const HotelsWiget = () => {
               <p>Dubai</p>
               <p>United Arab Emirates</p>
             </div>
+
             <div className="hw-addcheckin">
-              <p>Check-In</p>
+              <div className="checkinheaddiv">
+                <p className="checkinheading">Check-In</p>
+                <MdKeyboardArrowDown
+                  size={20}
+                  onClick={handleCheckinIconClick}
+                  color="#008cff"
+                />
+              </div>
+              {showCheckinDate && (
+                <DatePicker
+                  selected={selectedCheckinDate}
+                  onChange={handleCheckinDate}
+                  inline
+                />
+              )}
               <p>
-                <span>19</span> Nov23
+                <span id="cinday"></span>
+                <span id="cinmonth"></span>
+                <span id="cinyear"></span>
               </p>
-              <p>Sunday</p>
+              <p id="cindayName"></p>
             </div>
+
             <div className="hw-addcheckout">
-              <p>Check-Out</p>
+              <div className="checkoutheaddiv">
+                <p className="checkoutheading">Check-out</p>
+                <MdKeyboardArrowDown
+                  size={20}
+                  onClick={handleCheckoutIconClick}
+                  color="#008cff"
+                />
+              </div>
+              {showCheckoutDate && (
+                <DatePicker
+                  selected={selectedCheckoutDate}
+                  onChange={handleCheckoutDate}
+                  inline
+                />
+              )}
               <p>
-                <span>12</span> Dec23
+                <span id="coutday"></span>
+                <span id="coutmonth"></span>
+                <span id="coutyear"></span>
               </p>
-              <p>Tuesday</p>
+              <p id="coutdayName"></p>
             </div>
+
             <div className="hw-roomsandguest">
               <p>Rooms & Guests</p>
               <p>
@@ -81,7 +162,10 @@ const HotelsWiget = () => {
             <span>Dubai, United Arab Emirates</span>
             <span>Bangkok, Thailand</span>
           </div>
-          <Searchbutton />
+
+          <Link to="/hotels">
+            <Searchbutton />
+          </Link>
         </Container>
       </div>
     </>
