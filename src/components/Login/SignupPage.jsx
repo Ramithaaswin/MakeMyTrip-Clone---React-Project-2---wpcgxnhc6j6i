@@ -71,7 +71,7 @@ const SignupPage = ({ setShowLogin }) => {
       ...formData,
       appType: "bookingportals",
     });
-    setShowLogin(false);
+    // setShowLogin(false);
   };
   useEffect(() => {
     if (data.data) {
@@ -81,6 +81,7 @@ const SignupPage = ({ setShowLogin }) => {
 
   useEffect(() => {
     if (authenticated) {
+      setShowLogin(false);
       navigate("/");
     }
   }, [authenticated]);
