@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./hotelsearchpage.css";
 import { Stickyheader } from "../stickeyheader/Stickyheader";
 import { Container } from "@mui/material";
@@ -9,81 +9,75 @@ import hotelimagemain from "../images/hotelimagemain.png";
 import hotelimage1 from "../images/hotelimage1.png";
 import hotelimage2 from "../images/hotelimage2.png";
 import hotelimage3 from "../images/hotelimage3.png";
+import { Link } from "react-router-dom";
 
 const HotelSearchPage = () => {
   return (
     <>
-      <Stickyheader /> 
+      <Stickyheader />
       <div className="maindiv">
-        <div className="hotelsearchtopdiv">
-          <div className="hotels-detailsdiv">
-            <div className="filldetailslist">
-              <div>
-                <p>
-                  CITY, AREA OR PROPERTY <MdKeyboardArrowDown size={20} />
-                </p>
+        <div className="filldetailslist">
+          <div>
+            <p>
+              CITY, AREA OR PROPERTY <MdKeyboardArrowDown size={20} />
+            </p>
 
-                <p className="selecteditem">Bengaluru</p>
-              </div>
-              <div>
-                <p>
-                  CHECK-IN <MdKeyboardArrowDown size={20} />
-                </p>
-                <p className="selecteditem">Wed,6 Dec 2023</p>
-              </div>
-              <div>
-                <p>
-                  CHECK-OUT <MdKeyboardArrowDown size={20} />
-                </p>
-                <p className="selecteditem">Tuesday,12 Dec 2023</p>
-              </div>
-              <div>
-                <p>
-                  ROOMS & GUESTS
-                  <MdKeyboardArrowDown size={20} />
-                </p>
-                <p className="selecteditem">1 Room,2 Adults</p>
-              </div>
-              <button>SEARCH</button>
-            </div>
-
-            <div className="searchresult-linktohome">
-              <div className="para-div">
-                <p className="direct-to-home">Home</p>
-                <IoIosArrowForward className="para-div-arrowicon" />
-                <p className="searchresultshead">
-                  Hotels and more in Bangalore
-                </p>
-              </div>
-              <h3>1455 Properties in Bangalore</h3>
-            </div>
+            <p className="selecteditem">Bengaluru</p>
           </div>
-
-          <div className="hotels-sortandsearchdiv">
-            <div className="sort-by-div">
-              <span className="sort-by-head">SORT BY:</span>
-              <ul>
-                <li>Popular</li>
-                <li>
-                  User Rating<span>(Highest First)</span>
-                </li>
-                <li>
-                  Price <span>(Highest First)</span>
-                </li>
-                <li>
-                  Price <span>(Lowest First)</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="search-inputbox-div">
-              <div className="searchicon-hotels"></div>
-              <input placeholder="Search for locality / hotel name" />
-            </div>
+          <div>
+            <p>
+              CHECK-IN <MdKeyboardArrowDown size={20} />
+            </p>
+            <p className="selecteditem">Wed,6 Dec 2023</p>
           </div>
+          <div>
+            <p>
+              CHECK-OUT <MdKeyboardArrowDown size={20} />
+            </p>
+            <p className="selecteditem">Tuesday,12 Dec 2023</p>
+          </div>
+          <div>
+            <p>
+              ROOMS & GUESTS
+              <MdKeyboardArrowDown size={20} />
+            </p>
+            <p className="selecteditem">1 Room,2 Adults</p>
+          </div>
+          <button>SEARCH</button>
         </div>
 
-        {/* <Container> */}
+        <div className="searchresult-linktohome">
+          <div className="para-div">
+            <p className="direct-to-home">Home</p>
+            <IoIosArrowForward className="para-div-arrowicon" />
+            <p className="searchresultshead">Hotels and more in Bangalore</p>
+          </div>
+          <h3>1455 Properties in Bangalore</h3>
+        </div>
+
+        <div className="hotels-sortandsearchdiv">
+          <div className="sort-by-div">
+            <span className="sort-by-head">SORT BY:</span>
+            <ul>
+              <li>Popular</li>
+              <li>
+                User Rating<span>(Highest First)</span>
+              </li>
+              <li>
+                Price <span>(Highest First)</span>
+              </li>
+              <li>
+                Price <span>(Lowest First)</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="search-inputbox-div">
+            <div className="searchicon-hotels"></div>
+            <input placeholder="Search for locality / hotel name" />
+          </div>
+        </div>
+       
         <div className="hotelsearchbottomdiv">
           <div className="applyfilters-sidebar">
             <div className="exploremapdiv">
@@ -221,54 +215,57 @@ const HotelSearchPage = () => {
 
           <div className="mainsearchresultspage">
             <h3>Popular in Bangalore</h3>
-            <div className="showhoteldiv">
-              <div className="hotelsdetailsdiv">
-                <div className="hoteldetails-leftdiv">
-                  <div className="hotelimagesdiv">
-                    <div className="mainimagediv">
-                      <img src={hotelimagemain} />
+            <Link to="/singlehotel" style={{ textDecoration: "none" }}>
+              <div className="showhoteldiv">
+                <div className="hotelsdetailsdiv">
+                  <div className="hoteldetails-leftdiv">
+                    <div className="hotelimagesdiv">
+                      <div className="mainimagediv">
+                        <img src={hotelimagemain} />
+                      </div>
+                      <div className="subimagediv">
+                        <img src={hotelimagemain} />
+                        <img src={hotelimage1} />
+                        <img src={hotelimage2} />
+                        <img src={hotelimage3} />
+                      </div>
                     </div>
-                    <div className="subimagediv">
-                      <img src={hotelimagemain} />
-                      <img src={hotelimage1} />
-                      <img src={hotelimage2} />
-                      <img src={hotelimage3} />
+                    <div className="hoteldescriptiondiv">
+                      <div className="hotelname-rating-div">
+                        <h4>West Fort Hotel</h4>
+                        {/* <span className="blackstar"></span>
+                      <span className="greystar"></span> */}
+                      </div>
+                      <p className="hotellocation">
+                        <span>Near Bangalore Train Station </span>| 540m from
+                        Bangalore City Junction Railway Station
+                      </p>
+                      <div className="couplefriendly">Couple Friendly</div>
                     </div>
                   </div>
-                  <div className="hoteldescriptiondiv">
-                    <div className="hotelname-rating-div">
-                      <h4>West Fort Hotel</h4>
-                      <span className="blackstar"></span>
-                      <span className="greystar"></span>
+                  <div className="hoteldetails-rightdiv">
+                    <div className="ratingpointdiv">
+                      <span>Very Good</span>
+                      <span>4.0</span>
                     </div>
-                    <p className="hotellocation">
-                      <span>Near Bangalore Train Station </span>| 540m from
-                      Bangalore City Junction Railway Station
+                    <p className="numberofratings">266 Ratings</p>
+                    <div className="hotelbookingprice">
+                      <h2>₹ 3,040</h2>
+                      <p>+ ₹ 224 taxes & fees</p>
+                      <p>Per Night</p>
+                    </div>
+                    <p className="linktologin">
+                      Login to Book Now & Pay Later!
                     </p>
-                    <div className="couplefriendly">Couple Friendly</div>
                   </div>
                 </div>
-                <div className="hoteldetails-rightdiv">
-                  <div className="ratingpointdiv">
-                    <span>Very Good</span>
-                    <span>4.0</span>
-                  </div>
-                  <p className="numberofratings">266 Ratings</p>
-                  <div className="hotelbookingprice">
-                    <h2>₹ 3,040</h2>
-                    <p>+ ₹ 224 taxes & fees</p>
-                    <p>Per Night</p>
-                  </div>
-                  <p className="linktologin">Login to Book Now & Pay Later!</p>
-                </div>
+                <p className="offerplan">
+                  Exclusive Offer on SBI Credit Cards. Get INR 1264 Off
+                </p>
               </div>
-              <p className="offerplan">
-                Exclusive Offer on SBI Credit Cards. Get INR 1264 Off
-              </p>
-            </div>
+            </Link>
           </div>
         </div>
-        {/* </Container> */}
       </div>
     </>
   );

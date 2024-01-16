@@ -38,12 +38,15 @@
 }
 .hw-cityname{
     /* border: 2px solid green; */
-    width: 270px;
+    width: 343px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.hw-cityname:hover{
+    background-color: #EAF5FF;
 }
 .hw-cityname p:nth-child(1){
     /* border: 2px solid red; */
@@ -64,12 +67,15 @@
 }
 
 .hw-addcheckin{
-    width: 110px;
+    width: 150px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.hw-addcheckin:hover{
+    background-color: #EAF5FF;
 }
 .checkinheaddiv{
     /* border: 2px solid red; */
@@ -97,12 +103,15 @@
 }
 
 .hw-addcheckout{
-    width: 110px;
+    width: 150px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.hw-addcheckout:hover{
+    background-color: #EAF5FF;
 }
 .checkoutheaddiv{
     display: flex;
@@ -130,10 +139,13 @@
 .hw-roomsandguest{
     width: 270px;
     padding: 10px 19px;
-    border-right: solid 1px #e7e7e7;
+    /* border-right: solid 1px #e7e7e7; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.hw-roomsandguest:hover{
+    background-color: #EAF5FF;
 }
 .hw-roomsandguest p:nth-child(1){
     margin-bottom: 10px;

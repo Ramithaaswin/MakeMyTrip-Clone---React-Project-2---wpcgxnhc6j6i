@@ -34,7 +34,7 @@
     cursor: pointer;
 }
 .activenav{
-    border-bottom: 3px solid blue;
+    border-bottom: 3px solid #3FA4F6;
 }
 .flightimage{
     background-image: url("../images/headerimages.png");

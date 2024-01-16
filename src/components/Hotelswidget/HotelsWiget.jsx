@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./hotelswidget.css";
 import { Container } from "@mui/material";
 import Searchbutton from "../Searchbutton/Searchbutton";
@@ -6,20 +6,27 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import OutsideClickHandler from "react-outside-click-handler";
+import Hotelpopup from "../widgetpopup/Hotelpopup";
 
 const HotelsWiget = () => {
-  const [selectedOption, setSelectedOption] = useState("");
   const [showCheckinDate, setShowCheckinDate] = useState(false);
   const [selectedCheckinDate, setSelectedCheckinDate] = useState(null);
   const [showCheckoutDate, setShowCheckoutDate] = useState(false);
   const [selectedCheckoutDate, setSelectedCheckoutDate] = useState(null);
-
-  const handleChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
+  const [showHotelPopup, setShowHotelPopup] = useState(false);
+  const [hotelPopupData, setHotelPopupData] = useState();
 
   const handleCheckinIconClick = () => {
     setShowCheckinDate(!showCheckinDate);
+  };
+
+  const handlePopupClick=()=>{
+    setShowHotelPopup(!hotelPopupData)
+  }
+
+  const updateHotelPopupData = () => {
+    setHotelPopupData(hotelPopupData);
   };
 
   const handleCheckinDate = (date) => {
@@ -61,28 +68,6 @@ const HotelsWiget = () => {
       <div className="hotelwidgetmaindiv">
         <Container>
           <div className="hw-upperdiv">
-            <div>
-              <ul>
-                <li>
-                  <input
-                    type="radio"
-                    value="Upto 4 Rooms"
-                    checked={selectedOption === "Upto 4 Rooms"}
-                    onChange={handleChange}
-                  />
-                  <label>Upto 4 Rooms</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    value="Group Deals"
-                    checked={selectedOption === "Group Deals"}
-                    onChange={handleChange}
-                  />
-                  <label>Group Deals</label>
-                </li>
-              </ul>
-            </div>
             <p>
               Book Domestic and International Property Online. To list your
               property Click Here
@@ -105,19 +90,23 @@ const HotelsWiget = () => {
                   color="#008cff"
                 />
               </div>
-              {showCheckinDate && (
-                <DatePicker
-                  selected={selectedCheckinDate}
-                  onChange={handleCheckinDate}
-                  inline
-                />
-              )}
               <p>
                 <span id="cinday"></span>
                 <span id="cinmonth"></span>
                 <span id="cinyear"></span>
               </p>
               <p id="cindayName"></p>
+              {showCheckinDate && (
+                <OutsideClickHandler
+                  onOutsideClick={() => setShowCheckinDate(false)}
+                >
+                  <DatePicker
+                    selected={selectedCheckinDate}
+                    onChange={handleCheckinDate}
+                    inline
+                  />
+                </OutsideClickHandler>
+              )}
             </div>
 
             <div className="hw-addcheckout">
@@ -129,31 +118,41 @@ const HotelsWiget = () => {
                   color="#008cff"
                 />
               </div>
-              {showCheckoutDate && (
-                <DatePicker
-                  selected={selectedCheckoutDate}
-                  onChange={handleCheckoutDate}
-                  inline
-                />
-              )}
               <p>
                 <span id="coutday"></span>
                 <span id="coutmonth"></span>
                 <span id="coutyear"></span>
               </p>
               <p id="coutdayName"></p>
+              {showCheckoutDate && (
+                <OutsideClickHandler
+                  onOutsideClick={() => setShowCheckoutDate(false)}
+                >
+                  <DatePicker
+                    selected={selectedCheckoutDate}
+                    onChange={handleCheckoutDate}
+                    inline
+                  />
+                </OutsideClickHandler>
+              )}
             </div>
 
-            <div className="hw-roomsandguest">
+            <div className="hw-roomsandguest" onClick={handlePopupClick}>
               <p>Rooms & Guests</p>
               <p>
                 <span>1</span> Room <span> 2</span> Adults
               </p>
             </div>
-            <div className="hw-priceperight">
-              <p>Price Per Night</p>
-              <p>₹0-₹1500, ₹1500-₹2500,...</p>
-            </div>
+            {showHotelPopup && (
+              <OutsideClickHandler
+                onOutsideClick={() => setShowHotelPopup(false)}
+              >
+                <Hotelpopup
+                  updateHotelPopupData={updateHotelPopupData}
+                  setShowHotelPopup={setShowHotelPopup}
+                />
+              </OutsideClickHandler>
+            )}
           </div>
 
           <div className="hw-bottomdiv">

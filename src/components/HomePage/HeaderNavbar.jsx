@@ -5,7 +5,6 @@ const HeaderNavbar = ({
   setShowFlight,
   setShowHotel,
   setShowTrains,
-  setShowOthers,
   setShowHomestays,
   setShowHolidays,
   setShowBuses,
@@ -13,7 +12,7 @@ const HeaderNavbar = ({
   setShowForex,
   setShowTravelIns,
 }) => {
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState("flights");
 
   const handleShowFlights = () => {
     setShowFlight(true);

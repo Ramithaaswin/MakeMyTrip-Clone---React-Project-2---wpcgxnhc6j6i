@@ -6,6 +6,7 @@
     border-radius: 6px;
     box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
+    cursor: default;
 }
 .headingdiv{
     display: flex;
@@ -31,6 +32,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    cursor: default;
 }
 .rs-middle-div p:nth-child(1){
     color: #008cff;
@@ -58,6 +60,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    cursor: default;
 }
 .rs-rightdiv p:nth-child(1){
     color: #008cff;

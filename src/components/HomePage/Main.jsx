@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./main.css";
 import TopNavbar from "./TopNavbar";
 import { Container } from "@mui/material";
@@ -12,6 +11,8 @@ import HotelWidgetBottom from "../Hotelswidget/HotelWidgetBottom";
 import TrainWidgetBottom from "../Trainswidget/TrainWidgetBottom";
 import MainFooter from "../Footer/MainFooter";
 import OtherWidget from "../otherwidgets/OtherWidget";
+import BusesWidget from "../buseswidget/BusesWidget";
+import { Stickyheader } from "../stickeyheader/Stickyheader";
 
 const Main = () => {
   const [showFlight, setShowFlight] = useState(true);
@@ -23,9 +24,12 @@ const Main = () => {
   const [showCabs, setShowCabs] = useState(false);
   const [showForex, setShowForex] = useState(false);
   const [showTravelIns, setShowTravelIns] = useState(false);
+
+
   return (
     <>
       <div className="mainpage-top">
+
         <Container>
           <TopNavbar />
           <HeaderNavbar
@@ -44,7 +48,7 @@ const Main = () => {
           {showTrains && <TrainsWidget />}
           {showHomestays && <OtherWidget />}
           {showHolidays && <OtherWidget />}
-          {showBuses && <OtherWidget />}
+          {showBuses && <BusesWidget />}
           {showCabs && <OtherWidget />}
           {showForex && <OtherWidget />}
           {showTravelIns && <OtherWidget />}

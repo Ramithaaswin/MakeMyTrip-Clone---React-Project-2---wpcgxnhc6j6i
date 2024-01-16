@@ -2,6 +2,7 @@
     background-image: linear-gradient(#051225,#0a4281);
     height: 69vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 .mainpage-bottom{

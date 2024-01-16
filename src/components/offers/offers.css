@@ -17,6 +17,7 @@
 .offers-topdiv h1{
     font-weight: 900;
     margin: 0;
+    cursor: default;
 }
 .offers-topdiv-list{
     border-bottom: 1.5px solid #d8d8d8;
@@ -29,7 +30,17 @@
     margin-top: 5px;
     justify-content: space-around;
     width: 700px;
+    cursor: pointer;
 }
+.activeoffer{
+    color: #008CFF !important;
+    font-weight: 700;
+}
+.great-less{
+    box-shadow: -1px 0px 3px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+}
+
 .offers-bottomdiv{
     /* border: 2px solid black; */
     height: 85%;
@@ -37,6 +48,8 @@
     display: grid;
     grid-template-columns: auto auto auto;
     overflow-x: auto;
+    align-items: center;
+    justify-content: center;
 }
 .offers-bottomdiv::-webkit-scrollbar{
     display: none;

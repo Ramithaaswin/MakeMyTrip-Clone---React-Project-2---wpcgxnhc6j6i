@@ -2,43 +2,40 @@ import React from "react";
 import "./trainssearchpage.css";
 import { Stickyheader } from "../stickeyheader/Stickyheader";
 import { IoIosArrowUp } from "react-icons/io";
-import CarouselDate from "./CarouselDate";
+import { Link } from "react-router-dom";
 
 const TrainsSearchPage = () => {
   return (
     <>
-      <Stickyheader />
-
       <div className="trainspagemaindiv">
-        <div className="trainspage-topdiv">
-          <div className="trains-searchdetails-div">
-            <div className="fromcity-div">
-              <p>FROM CITY</p>
-              <p>NDLS,New Delhi</p>
-            </div>
-            <div className="tocity-div">
-              <p>TO CITY</p>
-              <p>CNB,Kanpur</p>
-            </div>
-            <div className="traveldate-div">
-              <p>TRAVEL DATE</p>
-              <p>Sun,17 Dec 23</p>
-            </div>
-            <div className="class-div">
-              <p>CLASS</p>
-              <p>All Classes</p>
-            </div>
-            <button className="trains-searchbtn">SEARCH</button>
+        <Stickyheader />
+        <div className="trains-searchdetails-div">
+          <div className="fromcity-div">
+            <p>FROM CITY</p>
+            <p>NDLS,New Delhi</p>
           </div>
+          <div className="tocity-div">
+            <p>TO CITY</p>
+            <p>CNB,Kanpur</p>
+          </div>
+          <div className="traveldate-div">
+            <p>TRAVEL DATE</p>
+            <p>Sun,17 Dec 23</p>
+          </div>
+          <div className="class-div">
+            <p>CLASS</p>
+            <p>All Classes</p>
+          </div>
+          <button className="trains-searchbtn">SEARCH</button>
+        </div>
 
-          <div className="sortedby-div">
-            <p>Sorted By :</p>
-            <p>
-              <span>Availability(Default)</span>
-              <IoIosArrowUp size={16} color="#008cff" />
-            </p>
-            <p>| Showing 48 out of 48 trains.</p>
-          </div>
+        <div className="sortedby-div">
+          <p>Sorted By :</p>
+          <p>
+            <span>Availability(Default)</span>
+            <IoIosArrowUp size={16} color="#008cff" />
+          </p>
+          <p>| Showing 48 out of 48 trains.</p>
         </div>
 
         <div className="trainspage-bottomdiv">
@@ -154,9 +151,9 @@ const TrainsSearchPage = () => {
           </div>
 
           <div className="searchresults-div">
-            <div className="datecarousal">
+            {/* <div className="datecarousal">
               <CarouselDate />
-            </div>
+            </div> */}
 
             <div className="showtrains">
               <div className="showtrains-topdiv">
@@ -185,24 +182,25 @@ const TrainsSearchPage = () => {
                   <div>
                     <p>6 hrs 20 mins</p>
                   </div>
-                  <p className="linktoviewroute">View route</p>
+                  {/* <p className="linktoviewroute">View route</p> */}
                 </div>
                 <div className="arrivaldetails-div">
                   <p>6:15 AM, Mon</p>
                   <p>Kanpur Central Railway Station (CNB)</p>
                 </div>
               </div>
-
-              <div className="showtrains-btmdiv">
-                <div className="sl-card">
-                  <div>
-                    <p>SL</p>
-                    <p>₹ 300</p>
+              <Link to="/traincheckout" className="linktotraincheckout">
+                <div className="showtrains-btmdiv">
+                  <div className="sl-card">
+                    <div>
+                      <p>SL</p>
+                      <p>₹ 300</p>
+                    </div>
+                    <p className="rac-nmbr">RAC 28</p>
+                    <p className="cancellation">Free Cancellation</p>
                   </div>
-                  <p className="rac-nmbr">RAC 28</p>
-                  <p className="cancellation">Free Cancellation</p>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

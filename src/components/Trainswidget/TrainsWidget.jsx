@@ -6,14 +6,39 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+import OutsideClickHandler from "react-outside-click-handler";
+import Trainpopup from "../widgetpopup/Trainpopup";
 
 const TrainsWidget = () => {
   const [selectTrainOption, setselectTrainOption] = useState("");
   const [showTravelDate, setShowTravelDate] = useState(false);
   const [selectedTravelDate, setSelectedTravelDate] = useState(null);
+  const [showTrainPopup, setShowTrainPopup] = useState(false);
+  const [trainPopupData, setTrainPopupData] = useState();
+  const [locations, setLocations] = useState({
+    from: "New Delhi",
+    to: "Kanpur",
+    trainStationB: "NDLS, New Delhi Railway Station",
+    trainStationA: "CNB, Kanpur Central",
+  });
+  const handleSwap = () => {
+    setLocations({
+      from: locations.to,
+      to: locations.from,
+      trainStationA: locations.trainStationB,
+      trainStationB: locations.trainStationA,
+    });
+  };
+  const handlePopupClick = () => {
+    setShowTrainPopup(!showTrainPopup);
+  };
 
   const handleChange = (e) => {
     setselectTrainOption(e.target.value);
+  };
+
+  const updateTrainPopupData = () => {
+    setTrainPopupData(trainPopupData);
   };
 
   const handleTravelIconClick = () => {
@@ -40,49 +65,25 @@ const TrainsWidget = () => {
       <div className="trainswidgetmaindiv">
         <Container>
           <div className="tw-upperdiv">
-            <div>
-              <ul>
-                <li>
-                  <input
-                    type="radio"
-                    value="Book Train Tickets"
-                    checked={selectTrainOption === "Book Train Tickets"}
-                    onChange={handleChange}
-                  />
-                  <label>Book Train Tickets</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    value="Check PNR Status"
-                    checked={selectTrainOption === "Check PNR Status"}
-                    onChange={handleChange}
-                  />
-                  <label>Check PNR Status</label>
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    value="Live Train Status"
-                    checked={selectTrainOption === "Live Train Status"}
-                    onChange={handleChange}
-                  />
-                  <label>Live Train Status</label>
-                </li>
-              </ul>
-            </div>
+            <p>Book Train Tickets</p>
           </div>
 
           <div className="tw-bottomdiv">
             <div className="tw-from">
               <p>From</p>
-              <p>New Delhi</p>
-              <p>NDLS, New Delhi Railway Station</p>
+              <p>{locations.from}</p>
+              <p>{locations.trainStationB}</p>
             </div>
+
+            <div class="new-div">
+            <span className="fltSwipCircle" onClick={handleSwap}>
+              <span className="flightsSprite"></span>
+            </span>
             <div className="tw-to">
               <p>To</p>
-              <p>Kanpur</p>
-              <p>CNB, Kanpur Central</p>
+              <p>{locations.to}</p>
+              <p>{locations.trainStationA}</p>
+            </div>
             </div>
 
             <div className="tw-traveldate">
@@ -94,26 +95,41 @@ const TrainsWidget = () => {
                   color="#008cff"
                 />
               </div>
-              {showTravelDate && (
-                <DatePicker
-                  selected={selectedTravelDate}
-                  onChange={handleTravelDate}
-                  inline
-                />
-              )}
               <p>
                 <span id="tday"></span>
                 <span id="tmonth"></span>
                 <span id="tyear"></span>
               </p>
               <p id="tdayName"></p>
+              {showTravelDate && (
+                <OutsideClickHandler
+                  onOutsideClick={() => setShowTravelDate(false)}
+                >
+                  <DatePicker
+                    selected={selectedTravelDate}
+                    onChange={handleTravelDate}
+                    inline
+                  />
+                </OutsideClickHandler>
+              )}
             </div>
 
-            <div className="tw-class">
+            <div className="tw-class" onClick={handlePopupClick}>
               <p>class</p>
               <p>ALL</p>
               <p>All class</p>
             </div>
+
+            {showTrainPopup && (
+              <OutsideClickHandler
+                onOutsideClick={() => setShowTrainPopup(false)}
+              >
+                <Trainpopup
+                  updateTrainPopupData={updateTrainPopupData}
+                  setShowTrainPopup={setShowTrainPopup}
+                />
+              </OutsideClickHandler>
+            )}
           </div>
           <Link to="/trains">
             <div className="tw-searchbtndiv">

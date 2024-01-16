@@ -7,9 +7,10 @@
     display: flex;
     align-items: center;
     position: relative;
-    cursor: pointer;
+    cursor: default;
     margin-top: 30px;
     min-height: 80px
+
 }
 .forexwidgetmaincontainer img{
     width: 61px;

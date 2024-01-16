@@ -1,7 +1,9 @@
 .stickyheaderpage{
+    /* border: 1px solid red; */
     position: sticky;
     top: 0;
     z-index: 20;
+    /* z-index: 50; */
 }
 .stickyheadermaindiv{
     /* border: 2px solid yellow; */
@@ -35,22 +37,38 @@
     height: 58px;
     width: 700px;
     /* border: 2px solid red; */
-    gap: 5px;
+    gap: 10px;
     margin-right: 140px;
     align-items: center;
     justify-content: center;
 }
 .navlinkslist li{
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     /* border: 2px solid green; */
     font-size: 12px;
     text-align: center;
     align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: inherit;
+    justify-content: space-evenly;
+    /* height: 100%; */
+    height: 58px;
+    /* width: inherit; */
+    width: 62px;
 }
+.navlinkslist li div:nth-child(2){
+    /* border: 1px solid red; */
+    text-decoration: none;
+    font-size: 12px;
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+.sticky-linktohome{
+    text-decoration: none;
+}
+
 .sh-flightsimg{
     background-image: url("../images/headerimages.png");
     background-position: -3px -26.5px;
@@ -114,6 +132,8 @@
     width: 25px;
     background-size: 156px 240px;
 }
+
+
 .sh-logindropdown{
     /* border: 2px solid blue; */
     display: flex;
@@ -143,11 +163,13 @@
 .login-para{
     text-align: left;
 }
+
+
 .sh-countryselectmaindiv{
     /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    /* gap: 1px; */
     height: 35px;
 }
 .country{
@@ -173,7 +195,7 @@
     /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    /* gap: 5px; */
     height: 35px;
 }
 .sh-language{
@@ -186,3 +208,62 @@
     justify-content: space-between;
     align-items: center;
 }
+
+
+.sh-afterloginorcreateaccnt{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.sh-afterloginorcreateaccnt div{
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.sh-loginlogoafterlogin{
+    background-image: linear-gradient(45deg,#219393,#ace143);
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+.sh-userDropdown {
+    width: 200px;
+    /* border: 1px solid red; */
+    background: #fff;
+    border-radius: 4px;
+    position: absolute;
+    top: 7vh;
+    right: 16rem;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+    z-index: 50;
+  }
+  .linktomytrips{
+    text-decoration: none;
+  }
+  .fadeIndown,
+  .logoutbtn {
+    /* border: 1px solid red; */
+    font-size: 10px;
+    margin-top: 6px;
+    padding: 15px;
+    gap: 10px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: 600;
+  }
+  :hover.fadeIndown:hover,
+  .logoutbtn:hover {
+    background-color: azure;
+  }

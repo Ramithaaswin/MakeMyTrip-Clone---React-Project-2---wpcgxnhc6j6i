@@ -9,6 +9,7 @@
     align-items: center;
     gap: 30px;
     background-color: #E7E7E7;
+    cursor: default;
 }
 .why-mmt{
     width: 60%;

@@ -1,0 +1,27 @@
+.background-image {
+    background-image: url('../images/randomimg.png');
+    background-size: cover;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+}
+.updating-soon-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    color: #065af3;
+    font-weight: 900;
+   }
+   @keyframes fadeInOut {
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+   }
+   
+   .updating-soon-text {
+    animation: fadeInOut 5s infinite;
+   }

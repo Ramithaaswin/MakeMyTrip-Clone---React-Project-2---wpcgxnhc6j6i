@@ -19,13 +19,6 @@
     text-decoration: none;
     list-style: none;
 }
-.fw-upperdiv div ul{
-    /* border: 2px solid black; */
-    list-style: none;
-    display: flex;
-    padding: 0;
-    gap: 20px;
-}
 
 .fw-middlediv{
     border: solid 1px #e7e7e7;
@@ -38,12 +31,16 @@
 }
 .fw-fromdiv{
     /* border: 2px solid green; */
-    width: 225px;
+    width: 300px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    cursor: pointer;
+}
+.fw-fromdiv:hover{
+    background-color: #EAF5FF;
 }
 .fw-fromdiv p:nth-child(1){
     /* border: 2px solid red; */
@@ -57,25 +54,68 @@
     margin: 0px;
     font-size: 30px;
     font-weight: 900;
+    text-align: left;
 }
 .fw-fromdiv p:nth-child(3){
+    width: 280px;
+    /* border: 1px solid red; */
     margin: 0;
     padding: 0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+.fltSwipCircle {
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    border-radius: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 30px 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-top: 35px;
+  }
+  .flightsSprite {
+    background-image: url("../images/alllogo.png");
+    background-size: 200px 650px;
+    font-size: 0px;
+    width: 15px;
+    height: 11px;
+    background-position: -149px -103px;
+}
+
 
 .fw-todiv{
     /* border: 2px solid green; */
-    width: 225px;
+    width: 300px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    cursor: pointer;
+    /* position: relative; */
+    /* margin: 0; */
 }
+.new-div{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+}
+.fw-todiv:hover,.new-div:hover{
+    background-color: #EAF5FF;
+}
+
 .fw-todiv p:nth-child(1){
     /* border: 2px solid red; */
     margin-bottom: 10px;
     margin-top: 0;
+    text-align: left;
 }
 .fw-todiv p:nth-child(2){
     /* border: 2px solid red; */
@@ -84,20 +124,29 @@
     margin: 0px;
     font-size: 30px;
     font-weight: 900;
+    text-align: left;
 }
 .fw-todiv p:nth-child(3){
     margin: 0;
     padding: 0;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 280px;
 }
 
 
 .fw-departurediv{
-    width: 110px;
+    width: 117px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.fw-departurediv:hover{
+    background-color: #EAF5FF;
 }
 .departureheaddiv{
     /* border: 2px solid blue; */
@@ -132,50 +181,15 @@
 }
 
 
-.fw-returndiv{
-    width: 110px;
-    padding: 10px 19px;
-    border-right: solid 1px #e7e7e7;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.returnheaddiv{
-    /* border: 2px solid blue; */
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: 0;
-    cursor: pointer;
-    padding: none;
-}
-.returnheading{
-    font-size: 14px;
-    margin: 0;
-    /* padding: 0; */
-}
-.fw-returndiv p:nth-child(2){
-    margin: 0;
-    padding: 0;
-}
-.fw-returndiv p span:nth-child(1){
-    margin: 0;
-    padding: 0;
-    font-size: 30px;
-    font-weight: 900;
-}
-.fw-returndiv p:nth-child(3){
-    margin: 0;
-    padding: 0;
-}
-
 .fw-travellersclassdiv{
+    /* border: 1px solid red; */
     padding: 10px 19px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+.fw-travellersclassdiv:hover{
+    background-color: #EAF5FF;
 }
 .fw-travellersclassdiv p:nth-child(1){
     margin-bottom: 10px;
@@ -205,43 +219,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.fw-faretypes{
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 664px;
-    gap: 3px;
-}
-.fw-faretypes p{
-    height: 45px;
-    width: 67px;
-    margin: 0;
-    margin-right: 5px;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-}
-.fw-faretypes div{
-    display: flex;
-    align-items: center;
-    /* border: 2px solid red; */
-    height: 45px;
-    gap: 5px;
-    background-color: rgb(242,242,242);
-    border-radius: 3px;
-}
-.fw-faretypes div input{
-    margin: 0;
-    margin-left: 5px;
-    padding: 0;
-}
-.fw-faretypes div label{
-    margin: 0;
-    padding: 0;
-    text-align: left;
-}
+
 .fw-trendingsearches{
     display: flex;
     font-size: 12px;
