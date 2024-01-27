@@ -63,7 +63,7 @@
   margin-bottom: 20px;
 }
 .rmsGst-hw :nth-child(1) {
-  font-size: 20px;
+  /* font-size: 20px; */
   /* font-weight: 600; */
   letter-spacing: 1px;
 }
@@ -76,14 +76,15 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 116px;
+  /* width: 116px; */
   height: 36px;
   background: rgb(255, 255, 255);
   border: 2px solid rgb(225, 231, 238);
   border-radius: 8px;
 }
 .plus-minus{
-  font-size: 18px;
+  /* font-size: 30px; */
+  cursor: pointer;
 }
 .travelClassList{
   /* border: 1px solid blue; */
@@ -98,7 +99,7 @@
 .travelClassList li {
   display: inline-flex;
   border-radius: 4px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
   margin-bottom: 24px;
   align-items: center;
@@ -107,6 +108,15 @@
   height: 32px;
   padding: 0 10px;
   font-weight: 600;
+  cursor: pointer;
+}
+.travelClassList li:hover{
+  background-color: #008CFF;
+  color: white;
+}
+.activeclass{
+  background-color: #008CFF;
+  color: white;
 }
 .travelClass p {
   font-size: large;

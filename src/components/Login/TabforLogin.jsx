@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import SignupPage from "../../components/Login/SignupPage";
 import LoginPage from "../../components/Login/LoginPage";
 import "./login.css";
 import { IoMdClose } from "react-icons/io";
-``;
-const TabforLogin = ({ showLogin, setShowLogin }) => {
+import LoginContext from "../../Context/LoginContext";
+
+const TabforLogin = () => {
   const [activeTab, setActiveTab] = useState(false);
+  const { showLogin, setShowLogin } = useContext(LoginContext);
+  
   const handleCloseLogin = (e) => {
     e.stopPropagation();
     setShowLogin(false);

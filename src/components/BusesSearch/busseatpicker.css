@@ -118,6 +118,16 @@
     width: 26px;
     height: 26px;
     margin-bottom: 4px;
+    cursor: pointer;
+}
+.seat-icon-bus-selected{
+    background: url("../images/busListingSprite.png");
+    background-size: 350px 500px;
+    background-position: -127px -381px;
+    width: 26px;
+    height: 26px;
+    margin-bottom: 4px;
+    cursor: pointer;
 }
 
 .seatconfirm-and-continuebtn{
@@ -162,6 +172,9 @@
     border: none;
 }
 .linktobuscheckout{
+    text-decoration: none;
+}
+.seatpicker-continue-link{
     text-decoration: none;
 }
 

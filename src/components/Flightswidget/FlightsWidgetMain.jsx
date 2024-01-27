@@ -8,19 +8,25 @@ import FwChooseOption from "./FwChooseOption";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import { Link, createSearchParams } from "react-router-dom";
 import OutsideClickHandler from "react-outside-click-handler";
-import AirportFromSearch from "./AirportFromSearch";
-import AirportToSearch from "./AirportToSearch";
 import Flightpopup from "../widgetpopup/Flightpopup";
+import AirportSearchDropdown from "./AirportSearchDropdown";
 
 const FlightsWidgetMain = () => {
+  const [searchData, setSearchData] = useState({
+    source: "PNQ",
+    destination: "JAI",
+    day: "Mon",
+    date: new Date().toLocaleDateString(),
+  });
+
   const [showFightPopup, setShowFlightPopup] = useState(false);
-  const [flightPopupData, setFlightPopupData] = useState();
-  const [showFromDropdown, setShowFromDropdown] = useState(false);
-  const [showToDropdown, setShowToDropdown] = useState(false);
   const [showDepartureDate, setShowDepartureDate] = useState(false);
   const [selectedDepartureDate, setSelectedDepartureDate] = useState(null);
+  const [travellers, setTravellers] = useState(1);
+  const [travellerclass, setTravellerClass] = useState("Economy");
+
   const [fromAirportData, setFromAirportData] = useState({
     city: "Pune",
     iata_code: "PNQ",
@@ -61,33 +67,18 @@ const FlightsWidgetMain = () => {
     }));
   };
 
+  const handleSearchData = (key, value) => {
+    setSearchData((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   const handlePopupClick = () => {
     setShowFlightPopup(!showFightPopup);
   };
-  const updateFlightPopupData = () => {
-    setFlightPopupData(flightPopupData);
-  };
 
-  const updateSelectedFromAirport = (fromairportdetails) => {
-    setFromAirportData(fromairportdetails);
-  };
-  const updateSelectedToAirport = (toairportdetails) => {
-    setToAirportData(toairportdetails);
-  };
-
-  const handleFromCityDropdown = () => {
-    setShowFromDropdown(!showFromDropdown);
-  };
-  const handleToCityDropdown = () => {
-    setShowToDropdown(!showToDropdown);
-  };
-
-  const handleDepartureIconClick = (e) => {
-    setShowDepartureDate(!showDepartureDate);
-  };
-  const handleDepartureDate = (date) => {
-    setSelectedDepartureDate(date);
-    setShowDepartureDate(false);
+  const updateDateDivValues = (date) => {
     const dday = date.getDate();
     const dmonth = date.toLocaleString("default", { month: "short" });
     const dyear = date.getFullYear().toString().slice(-2);
@@ -96,6 +87,35 @@ const FlightsWidgetMain = () => {
     document.getElementById("dmonth").innerText = dmonth;
     document.getElementById("dyear").innerText = dyear;
     document.getElementById("ddayName").innerText = ddayName;
+  };
+
+  useEffect(() => {
+    updateDateDivValues(new Date());
+  }, []);
+
+  const handleDepartureIconClick = () => {
+    setShowDepartureDate(!showDepartureDate);
+  };
+  const handleDepartureDate = (date) => {
+    setSelectedDepartureDate(date);
+    setShowDepartureDate(false);
+    updateDateDivValues(date);
+
+    const dday = date.getDate();
+    const dmonth = date.toLocaleString("default", { month: "short" });
+    const dyear = date.getFullYear().toString().slice(-2);
+    const ddayName = date.toLocaleDateString("default", { weekday: "long" });
+
+    document.getElementById("dday").innerText = dday;
+    document.getElementById("dmonth").innerText = dmonth;
+    document.getElementById("dyear").innerText = dyear;
+    document.getElementById("ddayName").innerText = ddayName;
+
+    handleSearchData(
+      "day",
+      date.toLocaleDateString("default", { weekday: "short" })
+    );
+    handleSearchData("date", date);
   };
 
   return (
@@ -107,47 +127,23 @@ const FlightsWidgetMain = () => {
           </div>
 
           <div className="fw-middlediv">
-            <div className="fw-fromdiv" onClick={handleFromCityDropdown}>
-              <p>From</p>
-              <p>{fromAirportData.city}</p>
-              <p>
-                {fromAirportData.iata_code}, {fromAirportData.name}
-              </p>
-            </div>
-            {showFromDropdown && (
-              <OutsideClickHandler
-                onOutsideClick={() => {
-                  setShowFromDropdown(false);
-                }}
-              >
-                <AirportFromSearch
-                  updateSelectedFromAirport={updateSelectedFromAirport}
-                  setShowFromDropdown={setShowFromDropdown}
-                />
-              </OutsideClickHandler>
-            )}
-            <div class="new-div">
+            <AirportSearchDropdown
+              handleSearchData={handleSearchData}
+              field={"From"}
+              airportData={fromAirportData}
+              setAirportData={setFromAirportData}
+            />
+            <div className="new-div">
               <span className="fltSwipCircle" onClick={handleSwap}>
                 <span className="flightsSprite"></span>
               </span>
 
-              <div className="fw-todiv" onClick={handleToCityDropdown}>
-                <p>To</p>
-                <p>{toAirportData.city}</p>
-                <p>
-                  {toAirportData.iata_code}, {toAirportData.name}
-                </p>
-              </div>
-              {showToDropdown && (
-                <OutsideClickHandler
-                  onOutsideClick={() => setShowToDropdown(false)}
-                >
-                  <AirportToSearch
-                    updateSelectedToAirport={updateSelectedToAirport}
-                    setShowToDropdown={setShowToDropdown}
-                  />
-                </OutsideClickHandler>
-              )}
+              <AirportSearchDropdown
+                handleSearchData={handleSearchData}
+                field={"To"}
+                airportData={toAirportData}
+                setAirportData={setToAirportData}
+              />
             </div>
 
             <div className="fw-departurediv" onClick={handleDepartureIconClick}>
@@ -169,6 +165,7 @@ const FlightsWidgetMain = () => {
                     selected={selectedDepartureDate}
                     onChange={handleDepartureDate}
                     inline
+                    minDate={new Date()}
                   />
                 </OutsideClickHandler>
               )}
@@ -180,16 +177,20 @@ const FlightsWidgetMain = () => {
                 <MdKeyboardArrowDown size={20} color="#008cff" />
               </p>
               <p>
-                <span>1</span> Traveller
+                <span>{travellers}</span> Traveller
               </p>
-              <p>Economy/Premium Economy</p>
+              <p>{travellerclass}</p>
             </div>
             {showFightPopup && (
               <OutsideClickHandler
                 onOutsideClick={() => setShowFlightPopup(false)}
               >
                 <Flightpopup
-                  updateFlightPopupData={updateFlightPopupData}
+                  travellers={travellers}
+                  setravellers={setTravellers}
+                  travellerclass={travellerclass}
+                  setTravellerClass={setTravellerClass}
+                  // updateFlightPopupData={updateFlightPopupData}
                   setShowFightPopup={setShowFlightPopup}
                 />
               </OutsideClickHandler>
@@ -211,7 +212,7 @@ const FlightsWidgetMain = () => {
               </p>
             </div>
           </div>
-          <Link to="/flights">
+          <Link to={`/flights?${createSearchParams(searchData)}`}>
             <Searchbutton />
           </Link>
           <div className="fw-exploremore">

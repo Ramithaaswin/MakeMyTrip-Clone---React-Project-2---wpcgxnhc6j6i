@@ -1,45 +1,26 @@
 .flightsearch{
     /* border: 1px solid white; */
     width: 100vw;
-    z-index: 50;   
 }
 .flightsearch-maindiv{
     /* border: 2px solid red; */
     height: auto;
     width: 100vw;
-    z-index: 50;
-}
-.flightsearch-topdiv{
-    /* border: 1px solid blue; */
-    /* position: sticky; */
-    /* top: 0; */
-    /* z-index: 30;   */
 }
 .tripdetails-div{
     /* border: 1px solid red; */
     background: #030e1a;
     font-weight: 400;
-    height: 48px;
+    height: 70px;
     display: flex;
     flex-direction: row;
-    /* margin: 0px 100px 0px 100px; */
     padding: 11px 100px 0px 100px;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-}
-.tripdetails-div div{
-    background: #ffffff1a;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    margin-right: 5px;
-    align-items: flex-start;
-    width: 160px;
-    padding: 0;
+    z-index: 200;
+    gap: 20px;
+    width: 86.1%;
 }
 .tripdetails-div div p:first-child{
+    /* border: 1px solid red; */
     font-size: 12px;
     line-height: 12px;
     font-weight: 700;
@@ -50,6 +31,19 @@
     align-items: center;
     height: 12px;
 }
+.fs-depart{
+    /* border: 1px solid red; */
+    background: #ffffff1a;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+    align-items: flex-start;
+    width: 160px;
+    padding: 0;
+    height: 50px;
+}
 .fd-selecteditem{
     font-size: 16px;
     line-height: 16px;
@@ -58,6 +52,26 @@
     margin: 0;
     display: flex;
 }
+.flight-search-btn{
+    font-size: 18px;
+    margin-left: 150px;
+    width: 176px;
+    align-items: center;
+    display: inline-flex; 
+    justify-content: center;
+    background-image: linear-gradient(96deg,#53b2fe,#065af3);
+    border: 0;
+    border-radius: 34px;
+    box-shadow: 0 1px 7px 0 #0003;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 900;
+    outline: 0;
+    padding: 9px 20px;
+    text-align: center;
+    height: 46px;
+}
+
 .partitiondiv{
     width: 100%;
     height: 10px;
@@ -79,7 +93,7 @@
     width: 295px;
     height: 1120px;
     /* height: auto; */
-    z-index: 20;
+    /* z-index: 20; */
     background-color: white;
     
 }
@@ -137,7 +151,7 @@
     font-size: 14px;
 }
 .rate{
-    margin-left: 5px;
+    margin-left: 5px; 
     font-size: 14px;
 }
 .airline-image-indigo{
@@ -180,26 +194,18 @@
     font-size: 16px;
     font-weight: 900;
 }
-.pricerange-slider{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.pricerange-slider input{
-    width: 100%;
-    height: 5px;
-}
-.raterange{
-    width: 100%;
+.htol-div,.ltoh-div{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    gap: 15px;
+}
+.htol-div p,.ltoh-div p{
+    font-size: 14px;
 }
 
 .departurefromdestination{
-    /* border: 1px solid green; */
+    border: 1px solid green;
     padding: 12px 15px;
     margin: 0;
     display: flex;
@@ -363,6 +369,7 @@
     padding: 0;
     margin: 0;
     width: 100%;
+    cursor: not-allowed;
 }
 .airlines-filter-maindiv ul li{
     width: 100%;
@@ -379,7 +386,8 @@
 }
 .airline-checkbox{
     /* border: 2px solid red; */
-    cursor: pointer;
+    /* cursor: pointer; */
+    cursor: not-allowed;
     height: 18px;
     width: 18px;
     margin: 0;
@@ -457,31 +465,24 @@
     /* border: 1px solid red; */
     width: 880px;
     box-shadow: 0 3px 30px 0 rgba(0,0,0,.1);
-    width: 880px;
-    height: 1120px;
+    /* width: 880px; */
+    height: 330vh;
     /* height: auto; */
-    z-index: 20;
+    /* z-index: 20; */
     background-color: #ebf0f5;
     margin: 0 0 0 30px;
-}
-.date-rate-carosel-div{
-    background: #fff;
-    box-shadow: 0 4px 7px 0 rgba(138,107,118,.2);
-    border-radius: 2px;
-    margin: 30px 30px 0 30px;
-    height: 71px;
-    width: 821px;
 }
 
 .flightdetails-maindiv{
     /* border: 2px solid green; */
-    margin: 40px 0 5px 0;
-    padding: 10px 14px;
+    margin-bottom: 10px;
+    /* padding: 0px 14px; */
     border-top: 8px solid white;
     background: #fff;
     border-radius: 2px;
-    height: 158px;
-    width: 852px;
+    /* height: 158px; */
+    /* width: 852px; */
+    padding-bottom: 1px;
     
 }
 .available-flightdetails{
@@ -490,6 +491,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin: 0 14px;
 }
 .flight-details-div{
     /* border: 1px solid red; */
@@ -498,10 +500,10 @@
     width: 150px;
     height: 69px;
     align-items: center;
-    gap: 10px;
+    /* gap: 10px; */
 }
-.airlinelogo{
-    background-image: url("../images/airindiaexpresslogo.png");
+.airlinelogo img{
+    /* border: 1px solid red; */
     width: 32px;
     height: 32px;
     background-position: 50%;
@@ -509,27 +511,32 @@
 }
 .airline-nameandno-div{
     margin: 0;
-    width: 100px;
+    /* width: 100px; */
     height: 37.5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-left: 10px;
 }
 .airline-nameandno-div p:first-child{
     margin: 0;
     padding: 0;
     width: 100px;
     text-overflow: ellipsis;
-    overflow: hidden;
+    /* overflow: hidden; */
     white-space: nowrap;
     font-size: 14px;
     font-weight: 700;
+    text-align: left;
 }
 .airline-nameandno-div p:nth-child(2){
     margin: 0;
     padding: 0;
     color: #878787;
     font-size: 11px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
 }
 .departure-details-div{
     /* border: 1px solid red; */
@@ -623,6 +630,11 @@
     color: #4a4a4a;
     font-size: 12px;
 }
+.seats-left{
+    color: red;
+    font-size: 14px;
+    /* padding: 20px 4px 20px 4px; */
+}
 .flight-booknow-btn{
     width: 117px;
     cursor: pointer;
@@ -644,15 +656,29 @@
 .offertext{
     background-color: rgb(255, 237, 209);
     height: 22px;
-    margin: 10px 0 10px 0;
+    font-size: 12px;
+    padding: 3px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin: 10px 14px;
 }
 .linktoflightdetails{
     color: #0091ff;
     cursor: pointer;
     font-size: 12px;
-    margin:20px 0;
+    margin:20px 14px 20px 0;
     padding: 0;
     text-align: right;
+
+}
+
+.datepicker{
+    position: fixed;
+    top: 18vh;
+    left: 33vw;
+    z-index: 1000;
 }
 
 

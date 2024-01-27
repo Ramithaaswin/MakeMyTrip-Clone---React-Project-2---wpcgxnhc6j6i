@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./hotelcheckoutpage.css";
 import Hotelcheckout from "../images/hotelimage1.png";
 import { Stickyheader } from "../stickeyheader/Stickyheader";
 import Userdetails from "./Userdetails";
+import useFetch from "../../Hooks/useFetch";
+import { useParams } from "react-router-dom";
 
 const Hotelcheckoutpage = () => {
+  const { data, get } = useFetch([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    get(`/bookingportals/hotel/${id}`);
+  }, [id]);
+
+  const baseCost = data?.data?.rooms[0].costDetails.baseCost || 0;
+  const taxesAndFees = data?.data?.rooms[0].costDetails.taxesAndFees || 0;
+  const totalCost = baseCost + taxesAndFees;
+
   return (
     <>
       <Stickyheader />
@@ -20,12 +33,12 @@ const Hotelcheckoutpage = () => {
               <div className="htlInfo__wrapper">
                 <div className="rvHtlInfo">
                   <div className="rvHtlInfoLft">
-                    <h3 className="hotelname-head">Ginger Goa, Panjim</h3>
+                    <h3 className="hotelname-head">{data?.data?.name}</h3>
 
                     <div className="rating-couple-friendly-div">
                       <div className="bus-rating-div">
                         <span className="ratingstar-img"></span>
-                        <p>4.9</p>
+                        <p>{data?.data?.rating}</p>
                       </div>
                       <span className=" htlInfo__tag">
                         <div>
@@ -36,14 +49,11 @@ const Hotelcheckoutpage = () => {
                       </span>
                     </div>
 
-                    <p className="hotel-address">
-                      Plot No. 37, 38,Near Passport Office,SGO Complex, EDC,
-                      Pato, Goa, India
-                    </p>
+                    <p className="hotel-address">{data?.data?.location}</p>
                   </div>
                   <div className="rvHtlInfoRht">
                     <div className="rvHtlInfoImg">
-                      <img src={Hotelcheckout} alt="hotel" />
+                      <img src={data?.data?.images[0]} alt="hotel" />
                     </div>
                   </div>
                 </div>
@@ -84,7 +94,7 @@ const Hotelcheckoutpage = () => {
                   <div className="makeFlex spaceBetween">
                     <div className="flexOne">
                       <h4 className="font18 latoBlack blackText">
-                        Luxe Twin Room
+                        {data?.data?.rooms[0].roomType} Room
                       </h4>
                       <p className="font14 grayText appendTop5">2 Adults</p>
                       <ul className="incList appendTop15 appendBottom10">
@@ -197,7 +207,9 @@ const Hotelcheckoutpage = () => {
                           </span>
                           <span className="fareHeader">1 Room x 1 Night</span>
                         </div>
-                        <span className="fontSize14 darkText">₹ 4,630</span>
+                        <span className="fontSize14 darkText">
+                          ₹ {data?.data?.rooms[0].costDetails.baseCost}
+                        </span>
                       </div>
                     </div>
                     <div className="fareTypeWrap">
@@ -208,7 +220,9 @@ const Hotelcheckoutpage = () => {
                           </span>
                           <span className="fareHeader">Hotel Taxes</span>
                         </div>
-                        <span className="fontSize14 darkText">₹ 691</span>
+                        <span className="fontSize14 darkText">
+                          ₹ {data?.data?.rooms[0].costDetails.taxesAndFees}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -217,7 +231,9 @@ const Hotelcheckoutpage = () => {
                       <span className="fontSize16 blackFont">
                         Total Amount to be paid
                       </span>
-                      <span className="fontSize16 blackFont">₹ 5,321</span>
+                      <span className="fontSize16 blackFont">
+                        ₹ {totalCost}
+                      </span>
                     </p>
                   </div>
                 </section>
@@ -226,7 +242,7 @@ const Hotelcheckoutpage = () => {
           </div>
         </div>
       </div>
-      <Userdetails />
+      <Userdetails data={data} keyforTrips={"hotel"} />
     </>
   );
 };

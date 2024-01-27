@@ -13,10 +13,17 @@ const EmiWidget = () => {
   const handlebankselect = (e) => {
     setSelectedBank(e.target.value);
   };
+
+  const handlePynowonBank = () => {
+    alert(
+      "Sorry..ths service is not available at the moment.Try another payment method."
+    );
+  };
+
   return (
     <>
       <div className="emi-main-div">
-        <div className="searchfield-div">
+        {/* <div className="searchfield-div">
           <span className="emi-search-icon">
             <CiSearch size={25} />
           </span>
@@ -25,7 +32,7 @@ const EmiWidget = () => {
             className="emi-searchinputfield"
             placeholder="Search your bank"
           />
-        </div>
+        </div> */}
         <div className="emi-title-div">
           <p className="allbanks-head">All Banks</p>
           <p className="creditcard-title">Credit Card</p>
@@ -104,7 +111,9 @@ const EmiWidget = () => {
         </ul>
         <div className="emi-amnt-paybtn-div">
           <p className="emi-payamnt">₹ 5050</p>
-          <button className="emi-payniw-btn">Pay now</button>
+          <button onClick={handlePynowonBank} className="emi-payniw-btn">
+            Pay now
+          </button>
         </div>
         <p className="emi-terms-conditions">
           By continuing to pay, I understand and agree with the{" "}

@@ -16,6 +16,7 @@ const PaymentOptions = () => {
   const [showGiftCardWidget, setShowGiftCardWidget] = useState(false);
   const [showGpayWidget, setShowGpayWidget] = useState(false);
   const [activeWidget, SetActiveWidget] = useState("upi");
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleShowCardWidget = () => {
     setShowCardWidget(true);
@@ -147,12 +148,27 @@ const PaymentOptions = () => {
         </div>
 
         <div className="paymentoptions-paywindow">
-          {showUpiWidget && <UpiWidget />}
-          {showCardWidget && <CardWidget />}
+          {showUpiWidget && (
+            <UpiWidget
+              setShowConfirmation={setShowConfirmation}
+              showConfirmation={showConfirmation}
+            />
+          )}
+          {showCardWidget && (
+            <CardWidget
+              setShowConfirmation={setShowConfirmation}
+              showConfirmation={showConfirmation}
+            />
+          )}
           {showPaylaterWidget && <BookNowPaylaterWidget />}
           {showNetBankingWidget && <EmiWidget />}
           {showGiftCardWidget && <GiftCardWidget />}
-          {showGpayWidget && <GpayWidget />}
+          {showGpayWidget && (
+            <GpayWidget
+              setShowConfirmation={setShowConfirmation}
+              showConfirmation={showConfirmation}
+            />
+          )}
         </div>
       </div>
     </>

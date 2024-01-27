@@ -20,12 +20,16 @@
     align-items: center;
     gap: 30px;
 }
+.linktohome-frompay{
+    cursor: pointer;
+}
 .mmt-logo-white{
     background-image: url("../images/paymentsprite.png");
     background-position: -5px -147px;
     height: 36px;
     width: 113px;
     background-size: 242px 326px;
+    cursor: pointer;
 }
 .logo-and-text p{
     color: #249b95;

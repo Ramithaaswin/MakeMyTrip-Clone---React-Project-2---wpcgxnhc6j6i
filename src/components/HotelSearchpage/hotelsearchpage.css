@@ -146,6 +146,7 @@
     justify-content: space-between;
     list-style: none;
     /* width: 792px; */
+    gap: 50px;
 }
 .sort-by-div ul li{
     cursor: pointer;
@@ -159,6 +160,10 @@
     color: #757575;
     font-size: 14px;
     font-weight: 400;
+}
+.sortactiveclass{
+    color: #008CFF !important;
+    border-bottom: 3px solid #008CFF;
 }
 .search-inputbox-div{
     /* border: 2px solid red; */
@@ -316,10 +321,14 @@
     height: 269px;
     width: 940px;
     border-radius: 4px;
+    margin-bottom: 20px;
 }
 .showhoteldiv:hover{
     border: 1px solid blue;
     cursor: pointer;
+}
+.linktosinglehotel{
+    text-decoration: none;
 }
 .hotelsdetailsdiv{
     /* border: 1px solid green; */

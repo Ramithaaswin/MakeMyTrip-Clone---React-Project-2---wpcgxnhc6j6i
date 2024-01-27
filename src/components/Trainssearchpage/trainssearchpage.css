@@ -286,6 +286,7 @@
     margin-right: 5px;
     display: flex;
     flex-direction: row;
+    width: 161px;
 }
 .departure-dates{
     margin: 0;
@@ -379,6 +380,9 @@
     height: 129px;
     text-decoration: none;
 }
+.showtrains-btmdiv::-webkit-scrollbar{
+    display: none;
+}
 .linktotraincheckout{
     text-decoration: none;
 }
@@ -396,6 +400,7 @@
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 20px;
+    margin-right: 10px;
 }
 .sl-card div{
     /* border: 2px solid black; */
@@ -420,4 +425,7 @@
     color: #545454;
     font-size: 12px;
     font-weight: 400;
+}
+.linkto-singletrain{
+    text-decoration: none;
 }

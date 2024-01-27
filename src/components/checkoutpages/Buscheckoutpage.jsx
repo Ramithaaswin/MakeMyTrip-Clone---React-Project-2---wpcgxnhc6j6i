@@ -1,137 +1,118 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./buscheckoutpage.css";
 import { Stickyheader } from "../stickeyheader/Stickyheader";
 import Userdetails from "./Userdetails";
+import useFetch from "../../Hooks/useFetch";
+import { useParams } from "react-router-dom";
 
 const Buscheckoutpage = () => {
+  const { data, get } = useFetch([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    get(`/bookingportals/bus/${id}`);
+  }, [id]);
   return (
     <>
       <Stickyheader />
-      <div className="reviewHeaderWrapper makeFlex vrtlCenter">
-        <div className="reviewHeaderContainer  makeFlex spaceBetween ">
-          <h1 className="latoBlack lineHeight29 font24">
-            Complete your booking
-          </h1>
-        </div>
+      <div className="booking-heading">
+        <h1>Complete your booking</h1>
       </div>
+
       <div className="busTravellersWrapper">
-        <div className="busTravellersContainer">
-          <section className="leftSection appendRight20">
-            <div className="travellerBusInfoDetails makeFlex column card">
-              <div className="cardPadding">
-                <div className="makeFlex spaceBetween appendBottom6 blackText">
-                  <p className="latoBlack font18">
-                    Raj Kalpana Travels Pvt.Ltd
-                  </p>
-                  <span className="latoBold font14">
-                    Seat No:
-                    <span>
-                      <span>U3</span>
-                    </span>
-                  </span>
-                </div>
-                <div className="makeFlex spaceBetween appendBottom10 font14">
-                  <span className="defaultGreyText font14">
-                    VE A/C Sleeper (2+1)
-                  </span>
-                </div>
+        <section className="bus-leftSection">
+          <div className="busdetails-topdiv">
+            <span className="latoBlack font18">{data?.data?.name}</span>
+            <span className="latoBold font14">Seat No:U3</span>
+          </div>
+
+          <div className="busdetails-seaterdiv">
+            <span>{data?.data?.type} Seater</span>
+          </div>
+
+          <div className="busdetails-ratingdiv">
+            <div className="bus-rating-div">
+              <span className="ratingstar-img"></span>
+              <p>4.9</p>
+            </div>
+          </div>
+
+          <div className="busdetails-btmdiv">
+            <div className="bus-departure-div">
+              <div className="depart-time-date-div">
+                <span className="departure-time">
+                  {data?.data?.departureTime}
+                </span>
+                <span className="departure-date">10 Jan' 24, Wed</span>
               </div>
-              <div className="makeFlex spaceBetween hrtlCenter appendBottom2 busFacilityStrip">
-                <div className="bus-rating-div">
-                  <span className="ratingstar-img"></span>
-                  <p>4.9</p>
-                </div>
-              </div>
-              <div className="makeFlex row blackText reviewBusInfoWrapper cardPadding spaceBetween">
-                <div>
-                  <span className="makeRelative font18 latoBold">
-                    23:30
-                    <span className="font16 latoRegular darkGreyText ml-2">
-                      10 Jan' 24, Wed
-                    </span>
-                  </span>
-                  <div className="makeFlex column maxWidth200 maxHeight200 appendTop8">
-                    <span className="font16 latoRegular appendBottom8 lineHeight18 blackText">
-                      Delhi
-                    </span>
-                    <span className="lineHeight20 colorGrey">
-                      <div className="latoRegular">Isbt kashmiri gate</div>
-                      <span className="latoRegular">
-                        Shop No 7 Kashmiri Gate Near Mandir Wali Parking{" "}
-                      </span>
-                    </span>
-                  </div>
-                </div>
-                <div className="makeFlex column hrtlCenter">
-                  <span className="font14 defaultGreyText"> 8h 40m</span>
-                  <div className="dottedLine"></div>
-                </div>
-                <div>
-                  <span className="makeRelative font18 latoBold">
-                    23:30
-                    <span className="font16 latoRegular darkGreyText ml-2">
-                      10 Jan' 24, Wed
-                    </span>
-                  </span>
-                  <div className="makeFlex column maxWidth200 maxHeight200 appendTop8">
-                    <span className="font16 latoRegular appendBottom8 lineHeight18 blackText">
-                      Delhi
-                    </span>
-                    <span className="lineHeight20 colorGrey">
-                      <div className="latoRegular">Isbt kashmiri gate</div>
-                      <span className="latoRegular">
-                        Shop No 7 Kashmiri Gate Near Mandir Wali Parking{" "}
-                      </span>
-                    </span>
-                  </div>
-                </div>
+
+              <div className="depart-place">
+                <span>{data?.data?.source}</span>
               </div>
             </div>
-          </section>
-          <div className="rightSection">
-            <div className="busrightcontainer">
-              <div id="FARE_SUMMARY">
-                <section className="bus-fareSummary">
-                  <div>
-                    <p className="fontSize18 blackFont">Price details</p>
-                  </div>
-                  <div className="fareBreakWrapper">
-                    <div className="fareTypeWrap">
-                      <div className="fareRow">
-                        <div className="makeFlex  pointer flexOne">
-                          <span className="appendRight10 ">
-                            <span className="iconPlusImg bgProperties"></span>
-                          </span>
-                          <span className="fareHeader">Base Fare</span>
-                        </div>
-                        <span className="fontSize14 darkText">₹ 699</span>
-                      </div>
-                    </div>
-                    <div className="fareTypeWrap">
-                      <div className="fareRow">
-                        <div className="makeFlex  pointer flexOne">
-                          <span className="appendRight10">
-                            <span className="iconPlusImg bgProperties"></span>
-                          </span>
-                          <span className="fareHeader">Amount</span>
-                        </div>
-                        <span className="fontSize14 darkText">₹ 699</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="fareFooter">
-                    <p className="totalprice">
-                      <span className="fontSize16 blackFont">Total Amount</span>
-                      <span className="fontSize16 blackFont">₹ 699</span>
-                    </p>
-                  </div>
-                </section>
+
+            <div className="duration-div">
+              <div className="dottedLine"></div>
+              <span> 8h 40m</span>
+              <div className="dottedLine"></div>
+            </div>
+
+            <div className="bus-arrival-div">
+              <div className="arrival-time-date-div">
+                <span className="arrival-time">{data?.data?.arrivalTime}</span>
+                <span className="arrival-date">10 Jan' 24, Wed</span>
+              </div>
+              <div className="arrive-place">
+                <span>{data?.data?.destination}</span>
               </div>
             </div>
           </div>
+        </section>
+
+        <div className="bus-rightSection">
+          <div>
+            <p className="fontSize18 blackFont">Price details</p>
+          </div>
+
+          <div className="fareBreakWrapper">
+            <div className="fareTypeWrap">
+              <div className="fareRow">
+                <div className="makeFlex  pointer flexOne">
+                  <span className="appendRight10 ">
+                    <span className="iconPlusImg bgProperties"></span>
+                  </span>
+                  <span className="fareHeader">Base Fare</span>
+                </div>
+                <span className="fontSize14 darkText">
+                  ₹ {data?.data?.fare}
+                </span>
+              </div>
+            </div>
+
+            <div className="fareTypeWrap">
+              <div className="fareRow">
+                <div className="makeFlex  pointer flexOne">
+                  <span className="appendRight10">
+                    <span className="iconPlusImg bgProperties"></span>
+                  </span>
+                  <span className="fareHeader">Amount</span>
+                </div>
+                <span className="fontSize14 darkText">
+                  ₹ {data?.data?.fare}
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="fareFooter">
+            <p className="totalprice">
+              <span className="fontSize16 blackFont">Total Amount</span>
+              <span className="fontSize16 blackFont">₹ {data?.data?.fare}</span>
+            </p>
+          </div>
         </div>
       </div>
-      <Userdetails />
+      <Userdetails data={data} keyforTrips={"bus"} />
     </>
   );
 };

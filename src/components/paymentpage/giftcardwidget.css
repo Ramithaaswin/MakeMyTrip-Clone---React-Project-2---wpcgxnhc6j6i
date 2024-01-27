@@ -27,6 +27,7 @@
     outline: none;
     margin: 0px 7px 14px 0;
     padding: 5px;
+    cursor: pointer;
 }
 .giftcard-option p{
     text-align: center;

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Context/AuthContext";
 import useFetch from "../../Hooks/useFetch";
+import LoginContext from "../../Context/LoginContext";
 
 const initialData = {
   email: "",
@@ -14,12 +15,13 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-const LoginPage = ({ setShowLogin }) => {
+const LoginPage = () => {
   const [errors, setErrors] = useState(initialData);
   const [formData, setFormData] = useState(initialData);
   const { data, post, loading } = useFetch(null);
   const { signUser, authenticated } = useAuthContext();
   const navigate = useNavigate();
+  const { showLogin, setShowLogin } = useContext(LoginContext);
 
   const getErrors = (name, value) => {
     let errorMessage = "";

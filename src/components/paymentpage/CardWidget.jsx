@@ -1,10 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./cardwidget.css";
 import Select from "react-select";
+import ConfirmationPopup from "../confirmation/ConfirmationPopup";
 
-const CardWidget = () => {
+const CardWidget = ({ setShowConfirmation, showConfirmation }) => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
+  const [cardNo, setCardNo] = useState("");
+  const [isCardNoValid, setIsCardNoValid] = useState(true);
+  const [cvv, setcvv] = useState("");
+  const [isCvvValid, setIsCvvValid] = useState(true);
+  const [cardName, setCardName] = useState("");
+  const [cardPayBtnEnable, setCardPayBtnEnable] = useState(false);
+
+  const handleEnableCardPayBtn = () => {
+    if (
+      cardNo &&
+      cardNo.length === 16 &&
+      isCardNoValid &&
+      cardName &&
+      cvv &&
+      cvv.length === 3 &&
+      isCvvValid &&
+      selectedMonth &&
+      selectedMonth.value &&
+      selectedYear &&
+      selectedYear.value
+    ) {
+      setCardPayBtnEnable(true);
+    } else {
+      setCardPayBtnEnable(false);
+    }
+  };
+
+  const validateCvv = () => {
+    if (cvv.length !== 2) {
+      setIsCvvValid(false);
+    } else {
+      setIsCvvValid(true);
+    }
+  };
+
+  useEffect(() => {
+    handleEnableCardPayBtn();
+  }, [cvv]);
+
+  const validateCardNo = () => {
+    if (cardNo.length !== 15) {
+      setIsCardNoValid(false);
+    } else {
+      setIsCardNoValid(true);
+    }
+  };
 
   const monthOptions = [
     { value: "1", label: "January(01)" },
@@ -36,13 +83,44 @@ const CardWidget = () => {
     label: (currentYear + i).toString(),
   }));
 
+  const handleConfirmClick = () => {
+    // setShowConfirmation(true);
+    alert(
+      "Sorry..ths service is not available at the moment.Try another payment method."
+    );
+  };
+
   return (
     <>
       <div className="cardwidget-container">
         <label className="labelforcardnumber">Card Number</label>
-        <input type="text" placeholder="Enter Your Card Number Here" />
+        <input
+          type="text"
+          placeholder="Enter Your Card Number Here"
+          required
+          onChange={(e) => {
+            setCardNo(e.target.value);
+            validateCardNo();
+            handleEnableCardPayBtn();
+          }}
+        />
+        {!isCardNoValid && (
+          <p style={{ color: "red", fontSize: "12px", margin: "0 0 20px 0" }}>
+            Card Numbere must have 16 digits
+          </p>
+        )}
+
         <label>Name on Card</label>
-        <input type="text" placeholder="Enter Your Name On Card" />
+        <input
+          onChange={(e) => {
+            setCardName(e.target.value);
+            handleEnableCardPayBtn();
+          }}
+          type="text"
+          placeholder="Enter Your Name On Card"
+          required
+        />
+
         <div className="expiry-cvv-div">
           <div className="expirydate-div">
             <label>Expiry Month & Year</label>
@@ -54,11 +132,7 @@ const CardWidget = () => {
                 onChange={setSelectedMonth}
                 styles={styles}
               />
-              {/* <input
-                className="month-dropdown"
-                type="month"
-                placeholder="Month"
-              /> */}
+
               <Select
                 className="year-dropdown"
                 options={yearOptions}
@@ -66,15 +140,45 @@ const CardWidget = () => {
                 onChange={setSelectedYear}
                 styles={styles}
               />
-              {/* <input className="year-dropdown" type="year" placeholder="Year" /> */}
             </div>
           </div>
+
           <div className="cvv-div">
             <label>Card CVV</label>
-            <input type="text" placeholder="Enter Card CVV" />
+            <input
+              placeholder="Enter Card CVV"
+              required
+              onChange={(e) => {
+                setcvv(e.target.value);
+                validateCvv();
+                handleEnableCardPayBtn();
+              }}
+            />
+            {!isCvvValid && (
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "12px",
+                  margin: "0px 0px 10px 0px",
+                }}
+              >
+                Cvv must have 3 digits
+              </p>
+            )}
           </div>
         </div>
-        <button className="card-paynow-btn">PAY NOW</button>
+        <button
+          disabled={!cardPayBtnEnable}
+          style={{ opacity: !cardPayBtnEnable ? 0.5 : 1 }}
+          className="card-paynow-btn"
+          onClick={handleConfirmClick}
+        >
+          PAY NOW
+        </button>
+        {showConfirmation && (
+          <ConfirmationPopup setShowConfirmation={setShowConfirmation} />
+        )}
+
         <p className="card-termsandconditions">
           By continuing to pay, I understand and agree with the{" "}
           <span>privacy policy</span>, the <span>user agreement</span> and{" "}

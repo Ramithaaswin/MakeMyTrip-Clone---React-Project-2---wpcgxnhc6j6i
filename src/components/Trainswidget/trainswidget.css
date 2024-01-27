@@ -29,30 +29,37 @@
     margin-right: 0;
 }
 .tw-from{
+    /* border: 1px solid red; */
     width: 350px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 10px 0 0 10px;
+    height: 88px;
 }
 .tw-from:hover{
     background-color: #EAF5FF;
 }
 .tw-from p:nth-child(1){
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
     margin-bottom: 10px;
     margin-top: 0;
 }
-.tw-from p:nth-child(2){
-    margin: 0;
+.train-selected-city{
+    /* border: 1px solid red; */
     padding: 0px;
     margin: 0px;
     font-size: 30px;
     font-weight: 900;
-}
-.tw-from p:nth-child(2){
-    margin: 0;
-    padding: 0;
+    width: 270px;
+    text-align: left;
+    /* overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis; */
 }
 
 .tw-to{
@@ -83,7 +90,7 @@
 }
 
 .tw-traveldate{
-    width: 140px;
+    width: 179px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
@@ -119,17 +126,22 @@
 .tw-class{
     width: 140px;
     padding: 10px 19px;
-    border-right: solid 1px #e7e7e7;
+    /* border-right: solid 1px #e7e7e7; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 0 10px 10px 0;
 }
 .tw-class:hover{
     background-color: #EAF5FF;
 }
 .tw-class p:nth-child(1){
+    /* border: 1px solid red; */
     margin-bottom: 10px;
     margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .tw-class p:nth-child(2){
     margin: 0;
@@ -138,13 +150,33 @@
     font-size: 30px;
     font-weight: 900;
 }
-.tw-class p:nth-child(2){
+.tw-class p:nth-child(3){
     margin: 0;
     padding: 0;
+    /* border: 1px solid red; */
 }
 .tw-searchbtndiv{
     /* border: 2px solid red; */
     position: absolute;
     top: 35.5vh;
     left: 33.5vw;
+}
+.train-search-maindiv{
+    height: 400px;
+    width: 350px;
+    background-color: white;
+    overflow: hidden;
+    z-index: 999999;
+    position: absolute;
+    top: 4vh;
+    left: 0.2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.dropdown-train{
+    position: relative;
 }

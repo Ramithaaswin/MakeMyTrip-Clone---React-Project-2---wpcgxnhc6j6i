@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logowhite from "../images/logowhite.png";
 import { Link, useNavigate } from "react-router-dom";
 import "./topnavbar.css";
@@ -7,9 +7,11 @@ import TabforLogin from "../Login/TabforLogin";
 import { useAuthContext } from "../../Context/AuthContext";
 import { SlLogout } from "react-icons/sl";
 import { SlHandbag } from "react-icons/sl";
+import LoginContext from "../../Context/LoginContext";
 
 const TopNavbar = () => {
-  const [showLogin, setShowLogin] = useState(false);
+  // const [showLogin, setShowLogin] = useState(false);
+  const { showLogin, setShowLogin } = useContext(LoginContext);
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const { authenticated, logoutUser } = useAuthContext();
@@ -59,7 +61,16 @@ const TopNavbar = () => {
             </div>
           </Link>
 
-          <Link to="/deadclick" className="linktodeadclick">
+          <Link
+            to={authenticated ? "/mytrips" : ""}
+            onClick={(e) => {
+              if (!authenticated) {
+                e.preventDefault();
+                setShowLogin(true);
+              }
+            }}
+            className="linktodeadclick"
+          >
             <div className="mytrips">
               <div className="mytripslogo"></div>
               <div className="mytripsdescription">
@@ -109,15 +120,12 @@ const TopNavbar = () => {
               <div className="languageselector">
                 <div className="flaglogo"></div>
                 <div>IN|ENG|INR</div>
-                
               </div>
             </Link>
           </div>
         </div>
       </div>
-      {showLogin && (
-        <TabforLogin showLogin={showLogin} setShowLogin={setShowLogin} />
-      )}
+      {showLogin && <TabforLogin />}
     </>
   );
 };

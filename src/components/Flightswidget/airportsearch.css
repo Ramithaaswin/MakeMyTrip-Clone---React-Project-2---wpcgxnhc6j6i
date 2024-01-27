@@ -6,8 +6,8 @@
     overflow: hidden;
     z-index: 999999;
     position: absolute;
-    top: 17vh;
-    left: 3vw;
+    top: 4vh;
+    left: -0.5vw;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -15,19 +15,6 @@
     background-color: #ffffff;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
  }
- .airportto-search-maindiv{
-    height: 400px;
-    width: 350px;
-    background-color: white;
-    overflow: hidden;
-    z-index: 999999;
-    position: absolute;
-    top: 17vh;
-    left: 26.7vw;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 4px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+ .drpdwn-container{
+   position: relative;
  }

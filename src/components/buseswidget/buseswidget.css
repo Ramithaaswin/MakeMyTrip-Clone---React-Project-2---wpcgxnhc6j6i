@@ -26,12 +26,15 @@
     cursor: pointer;
 }
 .bw-from{
-    width: 440px;
+    /* border: 1px solid red; */
+    width: 374px;
     padding: 10px 19px;
     border-right: solid 1px #e7e7e7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 10px 0 0 10px;
+    height: 88px;
 }
 .bw-from:hover{
     background-color: #EAF5FF;
@@ -86,6 +89,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 0 10px 10px 0;
 }
 .bw-traveldate:hover{
     background-color: #EAF5FF;
@@ -117,4 +121,24 @@
     position: absolute;
     top: 35.5vh;
     left: 33.5vw;
+}
+.busstand-search-maindiv{
+    /* border: 1px solid red; */
+    height: 400px;
+    width: 350px;
+    background-color: white;
+    overflow: hidden;
+    z-index: 999999;
+    position: absolute;
+    top: 5vh;
+    /* left: -2vw; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+}
+.bus-drpdwn-container{
+    position: relative;
 }

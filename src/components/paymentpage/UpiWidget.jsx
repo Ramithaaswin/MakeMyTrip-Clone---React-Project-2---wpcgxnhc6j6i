@@ -1,8 +1,110 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./upiwidget.css";
 import upiqrcode from "../images/upiqrcode.png";
+import ConfirmationPopup from "../confirmation/ConfirmationPopup";
+import useFetch from "../../Hooks/useFetch";
+import { useParams } from "react-router-dom";
 
-const UpiWidget = () => {
+const UpiWidget = ({ setShowConfirmation, showConfirmation }) => {
+  const [upi, setUpi] = useState("");
+  const [isUpiValid, setIsUpiValid] = useState(true);
+  const [payBtnActive, setPayBtnActive] = useState(false);
+  const { data, get, post } = useFetch([]);
+  const { id } = useParams();
+
+  const validateUpi = () => {
+    if (!upi.includes("@")) {
+      setIsUpiValid(false);
+    } else {
+      setIsUpiValid(true);
+    }
+  };
+
+  const validateAndEnablePay = () => {
+    if (upi && isUpiValid) {
+      setPayBtnActive(true);
+    } else {
+      setPayBtnActive(false);
+    }
+  };
+
+  useEffect(() => {
+    const value = localStorage.getItem("keyforpayment");
+    if (value !== undefined && value !== null) {
+      get(`/bookingportals/${value}/${id}`);
+    }
+  }, [id]);
+
+  // console.log("data", data);
+  const flightId = data?.data?._id;
+  const departureTime = data?.data?.departureTime;
+  const arrivalTime = data?.data?.arrivalTime;
+  const date = new Date();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const nextDay = date.getDate() + 1;
+  const startDate = year + "-" + 0 + month + "-" + day + "T" + departureTime;
+  const endDate = year + "-" + 0 + month + "-" + nextDay + "T" + arrivalTime;
+  const startDateHotel = year + "-" + 0 + month + "-" + day;
+  const endDateHotel = year + "-" + 0 + month + "-" + day;
+
+  // console.log(startDate);
+  // console.log(endDate);
+
+  const handleShowConfirm = async () => {
+    let flightBookingDetails;
+    const value = localStorage.getItem("keyforpayment");
+    if (value === "flight") {
+      flightBookingDetails = {
+        bookingType: "flight",
+        bookingDetails: {
+          flightId: flightId,
+          startDate: startDate,
+          endDate: endDate,
+        },
+      };
+    }
+    if (value === "train") {
+      flightBookingDetails = {
+        bookingType: "train",
+        bookingDetails: {
+          trainId: flightId,
+          startDate: startDate,
+          endDate: endDate,
+        },
+      };
+    }
+    if (value === "hotel") {
+      flightBookingDetails = {
+        bookingType: "hotel",
+        bookingDetails: {
+          hotelId: flightId,
+          startDate: startDateHotel,
+          endDate: endDateHotel,
+        },
+      };
+    }
+    if (value === "bus") {
+      flightBookingDetails = {
+        bookingType: "bus",
+        bookingDetails: {
+          busId: flightId,
+          startDate: startDate,
+          endDate: endDate,
+        },
+      };
+    }
+
+    // console.log(flightBookingDetails);
+    await post("/bookingportals/booking", flightBookingDetails);
+    // console.log(response);
+    setShowConfirmation(true);
+  };
+  if (data?.data?.message == "Booking successful") {
+    localStorage.setItem("paymentStatus", JSON.stringify(data?.data));
+  }
+
   return (
     <>
       <div className="upiwidget-maindiv">
@@ -31,8 +133,31 @@ const UpiWidget = () => {
                 type="text"
                 placeholder="mobileNumber@upi"
                 className="upiid-inputfield"
+                required
+                onChange={(e) => {
+                  setUpi(e.target.value);
+                  validateUpi();
+                  validateAndEnablePay();
+                }}
               />
-              <button className="upi-verifyandpay-btn">VERIFY & PAY</button>
+              {!isUpiValid && (
+                <p style={{ color: "red", fontSize: "12px", margin: "0" }}>
+                  Invalid UPI Id
+                </p>
+              )}
+
+              <button
+                className="upi-verifyandpay-btn"
+                onClick={handleShowConfirm}
+                disabled={!payBtnActive}
+                style={{ opacity: !payBtnActive ? 0.5 : 1 }}
+              >
+                VERIFY & PAY
+              </button>
+              {showConfirmation && (
+                <ConfirmationPopup setShowConfirmation={setShowConfirmation} />
+              )}
+
               <ul className="stepsforupipay">
                 <li>Enter your registered VPA</li>
                 <li>Receive payment request on bank app</li>

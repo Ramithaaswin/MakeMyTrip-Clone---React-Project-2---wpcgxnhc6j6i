@@ -1,22 +1,21 @@
 import React from "react";
 import "./offers.css";
-import offers1 from "../images/offers1.png";
+import useFetch from "../../Hooks/useFetch";
 
-const Offercards = () => {
+const Offercards = ({ item }) => {
   return (
     <>
       <div className="offers-btmdiv-griditem">
         <div className="griditem1-topdiv">
-          <img src={offers1} alt="offersimg1" />
+          <img src={item?.newHeroUrl} alt="offerImage" />
           <div>
-            <h3>For Your 1st Hotel Booking!</h3>
-            <p>Upto 20% OFF</p>
+            <h3>{item?.pTl}</h3>
+            <p>{item?.pTx}</p>
           </div>
         </div>
         <div className="griditem1-bottomdiv">
           <ul>
-            <li>T&C's Apply</li>
-            <li>code:WELCOMEMMT</li>
+            <li>{item?.tncCtaText}</li>
           </ul>
         </div>
       </div>
@@ -25,3 +24,12 @@ const Offercards = () => {
 };
 
 export default Offercards;
+
+
+
+
+
+
+
+
+

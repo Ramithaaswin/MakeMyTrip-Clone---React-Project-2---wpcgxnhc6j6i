@@ -1,16 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./busessearch.css";
 import { Stickyheader } from "../stickeyheader/Stickyheader";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import BusSeatPicker from "./BusSeatPicker";
+import BusTopSection from "./BusTopSection";
+import BusCard from "./BusCard";
+import { useSearchParams } from "react-router-dom";
+import useFetch from "../../Hooks/useFetch";
 
 const BusesSearch = () => {
-  const [isElementVisible, setElementVisibility] = useState(false);
+  const [params, setParams] = useSearchParams();
+  const source = params.get("source");
+  const destination = params.get("destination");
+  const day = params.get("day");
+  const stops = params.get("stops");
+  const sort = params.get("sort");
+  const departureTime = params.get("departureTime");
+  const { get, data } = useFetch([]);
   const [sortActive, setSortActive] = useState("relevance");
 
-  const toggleVisibility = () => {
-    setElementVisibility(!isElementVisible);
-  };
+  // const handleCheckboxChange = (key, value) => {
+  //   // setSelectedOption(value === selectedOption ? null : value);
+  //   if (value === "") {
+  //     params.delete(key);
+  //     setParams(params);
+  //     return;
+  //   }
+
+  //   const newSearchParams = { ...Object.fromEntries(params), [key]: value };
+  //   setParams(newSearchParams);
+  // };
+
+  useEffect(() => {
+    get(
+      `/bookingportals/bus?search={"source":"${source}","destination":"${destination}"}&day=${day}&limit=1000${
+        stops ? `&filter={"stops":"${stops}"}` : ""
+      }${sort ? `&sort={"ticketPrice":${sort}}` : ""}${
+        departureTime
+          ? `&filter={"departureTime":{"$lte":"15:00","$gte":"06:00"}}`
+          : ""
+      }`
+    );
+  }, [params]);
 
   const handleRelevanceList = () => {
     setSortActive("relevance");
@@ -34,29 +63,7 @@ const BusesSearch = () => {
   return (
     <div className="busessearch">
       <Stickyheader />
-
-      <div className="busessearch-headerdiv">
-        <div>
-          <p>
-            FROM <MdKeyboardArrowDown size={20} />
-          </p>
-          <p className="bussearch-selecteditem">Bengaluru,Karnataka</p>
-        </div>
-        <div>
-          <p>
-            TO <MdKeyboardArrowDown size={20} />
-          </p>
-          <p className="bussearch-selecteditem">Hyderabad,Telangana</p>
-        </div>
-        <div>
-          <p>
-            DEPART <MdKeyboardArrowDown size={20} />
-          </p>
-          <p className="bussearch-selecteditem">Mon,Feb 12,2024</p>
-        </div>
-        <button className="bussearch-searchbtn">SEARCH</button>
-      </div>
-
+      <BusTopSection />
       <div className="busessearch-bottomdiv">
         <div className="bs-bottom-leftdiv">
           <div className="bs-filters-heading">
@@ -164,57 +171,7 @@ const BusesSearch = () => {
               </li>
             </ul>
           </div>
-
-          <div className="busdetails-maindiv">
-            <div className="busdetails-topdiv">
-              <div className="bdtd-busdetails">
-                <div className="busnamedetails-div">
-                  <p>ANAGHA TRAVELS</p>
-                  <p>A/C Seater / Sleeper (2+1)</p>
-                </div>
-                <div className="bustimedetails-div">
-                  <div className="busdeparttime-div">
-                    <span>21:00</span>
-                    <span>18 JAN</span>
-                  </div>
-                  <div className="bustime-seperationline"></div>
-                  <div className="bus-duraion">09hrs 00mins</div>
-                  <div className="bustime-seperationline"></div>
-                  <div className="busarrivaltime-div">
-                    <span>06:00</span>
-                    <span>19 JAN</span>
-                  </div>
-                </div>
-                <div className="busfare-div">₹ 1600</div>
-              </div>
-              <div className="bus-rating-seats">
-                <div className="bus-rating-div">
-                  <span className="ratingstar-img"></span>
-                  <p>4.9</p>
-                </div>
-                <p className="seat-number">29 seats</p>
-              </div>
-            </div>
-
-            <div className="busdetails-bottomdiv">
-              <div>
-                <span>Amenities</span>
-                <MdKeyboardArrowDown className="amenities-downicon" />
-              </div>
-
-              <button
-                onClick={toggleVisibility}
-                className="bus-selectseats-btn"
-              >
-                {isElementVisible ? "HIDE SEAT" : "SELECT SEAT"}
-              </button>
-            </div>
-          </div>
-          {isElementVisible && (
-            <div>
-              <BusSeatPicker />
-            </div>
-          )}
+          <BusCard data={data} />
         </div>
       </div>
     </div>

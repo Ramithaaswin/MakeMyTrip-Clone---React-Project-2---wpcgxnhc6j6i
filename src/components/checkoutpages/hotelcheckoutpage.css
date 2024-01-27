@@ -315,6 +315,7 @@ font12 {
   background-color: #fff;
   border-radius: 2px;
   padding: 15px;
+  box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.3);
 }
 .fareBreakWrapper {
   border-bottom: 1px solid #000;

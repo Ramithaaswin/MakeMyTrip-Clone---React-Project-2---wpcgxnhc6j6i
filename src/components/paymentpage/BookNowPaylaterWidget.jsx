@@ -10,6 +10,13 @@ import olamoney from "../images/olamoney.png";
 import hdfc from "../images/hdfc.png";
 
 const BookNowPaylaterWidget = () => {
+
+  const setButtonClickAlert=()=>{
+    alert(
+      "Sorry..ths service is not available at the moment.Try another payment method."
+    );
+  }
+
   return (
     <>
       <div className="bnplw-main-container">
@@ -40,8 +47,8 @@ const BookNowPaylaterWidget = () => {
 
         <div className="paylater-eligibility-div">
           <div className="bnpl-text-btn-div">
-            <p>Check eligibility of mobile no. 918547084645</p>
-            <button>proceed</button>
+            <p>Check eligibility here</p>
+            <button onClick={setButtonClickAlert}>proceed</button>
           </div>
           <ul className="bnpl-options-list">
             <li>

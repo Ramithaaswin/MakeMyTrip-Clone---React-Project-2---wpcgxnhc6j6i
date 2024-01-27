@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./stickyheader.css";
 import logoblue from "../images/logoblue.png";
 import { BsChevronDown } from "react-icons/bs";
@@ -7,12 +7,13 @@ import TabforLogin from "../Login/TabforLogin";
 import { Link, useNavigate } from "react-router-dom";
 import { SlLogout } from "react-icons/sl";
 import { SlHandbag } from "react-icons/sl";
+import LoginContext from "../../Context/LoginContext";
 
 export const Stickyheader = () => {
-  const [showLogin, setShowLogin] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
   const { authenticated, logoutUser } = useAuthContext();
+  const { showLogin, setShowLogin } = useContext(LoginContext);
 
   const openMyStuffHover = () => {
     setIsHovered(true);

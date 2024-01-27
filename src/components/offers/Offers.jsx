@@ -1,91 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./offers.css";
-import { Container } from "@mui/material";
-import { FaLessThan, FaLessThanEqual } from "react-icons/fa";
+import { Button, Container } from "@mui/material";
+import { FaLessThan } from "react-icons/fa";
 import { FaGreaterThan } from "react-icons/fa";
-import { Button } from "@mui/material";
-import OtherWidget from "../otherwidgets/OtherWidget";
 import Offercards from "./Offercards";
+import useFetch from "../../Hooks/useFetch";
 
 const Offers = () => {
-  const [offerActive, setOfferActive] = useState("alloffers");
-  const [showAllOffer, setShowAllOffer] = useState(true);
-  const [showFlightOffer, setShowFlightOffer] = useState(false);
-  const [showHotelOffer, setShowHotelOffer] = useState(false);
-  const [showHolidays, setShowHolidays] = useState(false);
-  const [showTrainOffer, setShowTrainOffer] = useState(false);
-  const [showCabOffer, setShowCabOffer] = useState(false);
-  const [showBankOffer, setShowBankOffer] = useState(false);
+  const [offerActive, setOfferActive] = useState("ALL");
+  const { get, data } = useFetch([]);
 
-  const handleShowAllOffer = () => {
-    setOfferActive("alloffers");
-    setShowHolidays(false);
-    setShowAllOffer(true);
-    setShowBankOffer(false);
-    setShowCabOffer(false);
-    setShowFlightOffer(false);
-    setShowTrainOffer(false);
-    setShowHotelOffer(false);
+  const offers = [
+    { title: "All Offers", param: "ALL", allData: 67, index: 0 },
+    { title: "Hotels", param: "HOTELS", allData: 29, index: 1 },
+    { title: "Flights", param: "FLIGHTS", allData: 29, index: 2 },
+    { title: "Trains", param: "RAILS", allData: 6, index: 3 },
+    { title: "Cabs", param: "CABS", allData: 7, index: 4 },
+  ];
+  useEffect(() => {
+    // Initial data fetch or any other side effect
+    get(
+      `/bookingportals/offers?filter={"type":"${offers[0].param}"}&limit=${offers[0].allData}`
+    );
+  }, []);
+
+  const handleShowOffer = (param, index) => {
+    setOfferActive(param);
+    // Fetch data based on the selected offer type
+    get(
+      `/bookingportals/offers?filter={"type":"${param}"}&limit=${offers[index].allData}`
+    );
   };
-  const handleShowFlightOffer = () => {
-    setOfferActive("flightoffer");
-    setShowHolidays(false);
-    setShowAllOffer(false);
-    setShowBankOffer(false);
-    setShowCabOffer(false);
-    setShowFlightOffer(true);
-    setShowTrainOffer(false);
-    setShowHotelOffer(false);
+
+  const boxRef = useRef();
+
+  const handlePrevious = () => {
+    let width = boxRef.current.clientWidth * 0.91;
+    boxRef.current.scrollLeft -= width;
   };
-  const handleShowHotelOffer = () => {
-    setOfferActive("hoteloffer");
-    setShowHolidays(false);
-    setShowAllOffer(false);
-    setShowBankOffer(false);
-    setShowCabOffer(false);
-    setShowFlightOffer(false);
-    setShowTrainOffer(false);
-    setShowHotelOffer(true);
-  };
-  const handleShowHolidayOffer = () => {
-    setOfferActive("holidayoffer");
-    setShowHolidays(true);
-    setShowAllOffer(false);
-    setShowBankOffer(false);
-    setShowCabOffer(false);
-    setShowFlightOffer(false);
-    setShowTrainOffer(false);
-    setShowHotelOffer(false);
-  };
-  const handleShowTrainOffer = () => {
-    setOfferActive("trainoffer");
-    setShowHolidays(false);
-    setShowAllOffer(false);
-    setShowBankOffer(false);
-    setShowCabOffer(false);
-    setShowFlightOffer(false);
-    setShowTrainOffer(true);
-    setShowHotelOffer(false);
-  };
-  const handleShowCabOffer = () => {
-    setOfferActive("caboffer");
-    setShowHolidays(false);
-    setShowAllOffer(false);
-    setShowBankOffer(false);
-    setShowCabOffer(true);
-    setShowFlightOffer(false);
-    setShowTrainOffer(false);
-    setShowHotelOffer(false);
-  };
-  const handleShowBankOffer = () => {
-    setOfferActive("bankoffer");
-    setShowHolidays(false);
-    setShowAllOffer(false);
-    setShowBankOffer(true);
-    setShowCabOffer(false);
-    setShowFlightOffer(false);
-    setShowTrainOffer(false);
-    setShowHotelOffer(false);
+
+  const handleNext = () => {
+    let width = boxRef.current.clientWidth * 0.91;
+    boxRef.current.scrollLeft += width;
   };
 
   return (
@@ -93,75 +49,58 @@ const Offers = () => {
       <Container>
         <div className="offers-main">
           <div className="offers-topdiv">
-            <h1>Offers</h1>
+            <h2>Offers</h2>
             <ul className="offers-topdiv-list">
-              <li
-                className={offerActive === "alloffers" ? "activeoffer" : ""}
-                onClick={handleShowAllOffer}
-              >
-                All Offers
-              </li>
-              <li
-                className={offerActive === "flightoffer" ? "activeoffer" : ""}
-                onClick={handleShowFlightOffer}
-              >
-                Flights
-              </li>
-              <li
-                className={offerActive === "hoteloffer" ? "activeoffer" : ""}
-                onClick={handleShowHotelOffer}
-              >
-                Hotels
-              </li>
-              <li
-                className={offerActive === "holidayoffer" ? "activeoffer" : ""}
-                onClick={handleShowHolidayOffer}
-              >
-                Holidays
-              </li>
-              <li
-                className={offerActive === "trainoffer" ? "activeoffer" : ""}
-                onClick={handleShowTrainOffer}
-              >
-                Trains
-              </li>
-              <li
-                className={offerActive === "caboffer" ? "activeoffer" : ""}
-                onClick={handleShowCabOffer}
-              >
-                Cabs
-              </li>
-              <li
-                className={offerActive === "bankoffer" ? "activeoffer" : ""}
-                onClick={handleShowBankOffer}
-              >
-                Bank Offers
-              </li>
+              {offers.map((offer, index) => (
+                <li
+                  key={index}
+                  className={offerActive === offer.param ? "activeoffer" : ""}
+                  onClick={() => handleShowOffer(offer.param, offer.index)}
+                >
+                  {offer.title}
+                </li>
+              ))}
             </ul>
-
-            <div className="ml-24 great-less flex">
-              <Button className="">
+            <div className="great-less">
+              <Button onClick={handlePrevious}>
                 <FaLessThan className=" text-blue-500 rounded-s-full  h-6 w-8 " />
               </Button>
-              <Button className="">
+              <Button onClick={handleNext}>
                 <FaGreaterThan className=" text-blue-500 rounded-e-full  h-6 w-8 " />
               </Button>
             </div>
           </div>
 
-          <div className="offers-bottomdiv">
-            {showHolidays && <OtherWidget />}
-            {showAllOffer && <Offercards />}
-            {showBankOffer && <OtherWidget />}
-            {showCabOffer && <Offercards />}
-            {showFlightOffer && <Offercards/>}
-            {showHotelOffer && <Offercards/>}
-            {showTrainOffer && <Offercards/>}
+          <div className="offers-bottomdiv" ref={boxRef}>
+            {/* Render content based on the selected offer type */}
+
+            {offerActive === "ALL" &&
+              data?.data?.offers.map((item, index) => (
+                <Offercards item={item} key={index} />
+              ))}
+
+            {/* Add conditions for other offer types */}
+            {offerActive === "FLIGHTS" &&
+              data?.data?.offers.map((item, index) => (
+                <Offercards item={item} key={index} />
+              ))}
+
+            {offerActive === "HOTELS" &&
+              data?.data?.offers.map((item, index) => (
+                <Offercards item={item} key={index} />
+              ))}
+            {offerActive === "RAILS" &&
+              data?.data?.offers.map((item, index) => (
+                <Offercards item={item} key={index} />
+              ))}
+            {offerActive === "CABS" &&
+              data?.data?.offers.map((item, index) => (
+                <Offercards item={item} key={index} />
+              ))}
           </div>
         </div>
       </Container>
     </>
   );
 };
-
 export default Offers;
