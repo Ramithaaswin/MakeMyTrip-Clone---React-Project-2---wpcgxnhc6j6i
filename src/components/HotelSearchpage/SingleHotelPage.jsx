@@ -22,7 +22,7 @@ const SingleHotelPage = () => {
     <>
       <Stickyheader />
       <div className="singlehotelpage-maindiv">
-        <div className="singlehotel-headerdiv">
+        {/* <div className="singlehotel-headerdiv">
           <div>
             <p>
               CITY, AREA OR PROPERTY <MdKeyboardArrowDown size={20} />
@@ -49,7 +49,7 @@ const SingleHotelPage = () => {
             <p className="selecteditem">1 Room,2 Adults</p>
           </div>
           <button>SEARCH</button>
-        </div>
+        </div> */}
 
         <div className="hoteldetails-maindiv">
           <div className="topnav-text">

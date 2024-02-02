@@ -13,7 +13,7 @@ const TrainCard = ({ data }) => {
                 <div className="trainname-and-details">
                   <p className="trainname">{train?.trainName}</p>
                   <div className="traindetails-div">
-                    <p className="train-number">#{train?.trainNumber}</p>
+                    <p className="ts-train-number">#{train?.trainNumber}</p>
                     <p>
                       <span className="departure-dates">Departs on :</span>
                       <span>S</span>

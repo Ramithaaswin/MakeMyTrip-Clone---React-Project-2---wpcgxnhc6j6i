@@ -1,32 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IoIosArrowUp } from "react-icons/io";
+import Traintopstationsearch from "./Traintopstationsearch";
+import OutsideClickHandler from "react-outside-click-handler";
+import ReactDatePicker from "react-datepicker";
 
 const cities = [
   { JunctionName: "Delhi Junction" },
   { JunctionName: "Salem Junction" },
   { JunctionName: "Hubli Junction" },
-  { JunctionName: "Surat Junction" },
-  { JunctionName: "Udaipur Junction" },
+  { JunctionName: "Surat" },
+  { JunctionName: "Udaipur" },
   { JunctionName: "Katpadi Junction" },
   { JunctionName: "Vadodara Junction" },
-  { JunctionName: "Kanpur Junction" },
+  { JunctionName: "Kanpur" },
   { JunctionName: "Dhanbad Junction" },
   { JunctionName: "Kharagpur Junction" },
   { JunctionName: "Manmad Junction" },
   { JunctionName: "Indore Junction" },
   { JunctionName: "Vijayawada Junction" },
-  { JunctionName: "Chandigarh Junction" },
+  { JunctionName: "Chandigarh" },
   { JunctionName: "Gorakhpur Junction" },
   { JunctionName: "Gwalior Junction" },
   { JunctionName: "Ghaziabad Junction" },
-  { JunctionName: "Agra Cantonment Junction" },
+  { JunctionName: "Agra Cantonment" },
   { JunctionName: "Allahabad Junction" },
-  { JunctionName: "Ambala Cantonment Junction" },
-  { JunctionName: "Warangal Junction" },
+  { JunctionName: "Ambala Cantonment" },
+  { JunctionName: "Warangal" },
   { JunctionName: "Bhusaval Junction" },
   { JunctionName: "Howrah Junction" },
-  { JunctionName: "Thrissur Junction" },
+  { JunctionName: "Thrissur" },
   { JunctionName: "Yesvantpur Junction" },
   { JunctionName: "Visakhapatnam Junction" },
   { JunctionName: "Asansol Junction" },
@@ -34,9 +37,10 @@ const cities = [
   { JunctionName: "Ahmedabad Junction" },
   { JunctionName: "Visakhapatnam Junction" },
   { JunctionName: "Coimbatore Junction" },
+  { JunctionName: "Thiruvananthapuram Central" },
 ];
 
-const Traintopsection = () => {
+const Traintopsection = ({updateSearchParams}) => {
   const [fromTrainData, setFromTrainData] = useState({
     JunctionName: "Delhi Junction",
   });
@@ -48,6 +52,14 @@ const Traintopsection = () => {
   const date = decodeURI(params.get("date"));
   const source = params.get("source");
   const destination = params.get("destination");
+  const [searchData, setSearchData] = useState({
+    source: "Delhi Junction",
+    destination: "Salem Junction",
+    day: "Tue",
+    date: new Date().toLocaleDateString(),
+  });
+  const [showDate, setShowDate] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     const fromData = cities.find(
@@ -60,28 +72,69 @@ const Traintopsection = () => {
     setToTrainData(toData);
   }, [dropDownData]);
 
+  const handleSearchData = (key, value) => {
+    setSearchData((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const handleDepartureDateClick = () => {
+    setShowDate(!showDate);
+  };
+  const handleDepartureDate = (date) => {
+    setSelectedDate(date);
+    setShowDate(false);
+
+    document.getElementById("ts-datepicker").innerText = new Date(date)
+      .toString()
+      .split(" ")
+      .slice(0, 4)
+      .join(" ");
+  };
+  const handleTrainSearchButtonClick=()=>{
+    updateSearchParams(searchData);
+  }
+
   return (
     <>
       <div className="trainspage-topdiv">
         <div className="trains-searchdetails-div">
-          <div className="fromcity-div">
-            <p>FROM CITY</p>
-            <p>{fromTrainData?.JunctionName}</p>
-          </div>
-          <div className="tocity-div">
-            <p>TO CITY</p>
-            <p>{toTrainData?.JunctionName}</p>
-          </div>
-          <div className="traveldate-div">
+          <Traintopstationsearch
+            handleSearchData={handleSearchData}
+            field={"From"}
+            trainData={fromTrainData}
+            setTrainData={setFromTrainData}
+          />
+          <Traintopstationsearch
+            handleSearchData={handleSearchData}
+            field={"To"}
+            trainData={toTrainData}
+            setTrainData={setToTrainData}
+          />
+
+          <div className="traveldate-div" onClick={handleDepartureDateClick}>
             <p>TRAVEL DATE</p>
-            <p>{new Date(date).toString().split(" ").slice(0, 4).join(" ")}</p>
+            <p id="ts-datepicker">
+              {new Date(date).toString().split(" ").slice(0, 4).join(" ")}
+            </p>
           </div>
-          <div className="class-div">
-            <p>CLASS</p>
-            <p>All Classes</p>
-          </div>
-          <button className="trains-searchbtn">SEARCH</button>
+
+          <button className="trains-searchbtn" onClick={handleTrainSearchButtonClick}>SEARCH</button>
         </div>
+        {showDate && (
+          <OutsideClickHandler onOutsideClick={() => setShowDate(false)}>
+            <div className="trainsearch-datepicker">
+              <ReactDatePicker
+                selected={selectedDate}
+                onChange={handleDepartureDate}
+                inline
+                minDate={new Date()}
+              />
+            </div>
+          </OutsideClickHandler>
+        )}
+
         <div className="sortedby-div">
           <p>Sorted By :</p>
           <p>

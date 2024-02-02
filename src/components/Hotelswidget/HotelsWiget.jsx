@@ -12,7 +12,7 @@ import HotelCityDropdown from "./HotelCityDropdown";
 
 const HotelsWiget = () => {
   const [searchData, setSearchData] = useState({
-    location: "Delhi",
+    location: "Pune",
   });
   const [rcount, setRCount] = useState(1);
   const [gcount, setGCount] = useState(2);
@@ -64,10 +64,10 @@ const HotelsWiget = () => {
     document.getElementById("cinyear").innerText = cinyear;
     document.getElementById("cindayName").innerText = cindayName;
     handleSearchData(
-      "day",
+      "checkindate",
       date.toLocaleDateString("default", { weekday: "short" })
     );
-    handleSearchData("date", date);
+    handleSearchData("checkindate", date);
   };
 
   const handleCheckoutIconClick = () => {
@@ -120,10 +120,10 @@ const HotelsWiget = () => {
     document.getElementById("coutdayName").innerText = coutdayName;
 
     handleSearchData(
-      "day",
+      "checkoutdate",
       date.toLocaleDateString("default", { weekday: "short" })
     );
-    handleSearchData("date", date);
+    handleSearchData("checkoutdate", date);
   };
 
   return (

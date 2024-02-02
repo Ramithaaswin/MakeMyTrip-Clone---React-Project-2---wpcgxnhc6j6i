@@ -17,18 +17,6 @@ const BusesSearch = () => {
   const { get, data } = useFetch([]);
   const [sortActive, setSortActive] = useState("relevance");
 
-  // const handleCheckboxChange = (key, value) => {
-  //   // setSelectedOption(value === selectedOption ? null : value);
-  //   if (value === "") {
-  //     params.delete(key);
-  //     setParams(params);
-  //     return;
-  //   }
-
-  //   const newSearchParams = { ...Object.fromEntries(params), [key]: value };
-  //   setParams(newSearchParams);
-  // };
-
   useEffect(() => {
     get(
       `/bookingportals/bus?search={"source":"${source}","destination":"${destination}"}&day=${day}&limit=1000${
@@ -60,10 +48,19 @@ const BusesSearch = () => {
     setSortActive("departure");
   };
 
+  const handleBusSearchButtonClick = (searchData) => {
+    setParams({
+      source: searchData.source,
+      destination: searchData.destination,
+      day: searchData.day,
+      date: searchData.date, // Assuming date is part of searchData
+    });
+  };
+
   return (
     <div className="busessearch">
       <Stickyheader />
-      <BusTopSection />
+      <BusTopSection updateSearchParams={handleBusSearchButtonClick} />
       <div className="busessearch-bottomdiv">
         <div className="bs-bottom-leftdiv">
           <div className="bs-filters-heading">

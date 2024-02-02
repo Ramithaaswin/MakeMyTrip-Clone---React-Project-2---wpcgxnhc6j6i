@@ -17,17 +17,6 @@ const TrainsSearchPage = () => {
   const departureTime = params.get("departureTime");
   const { get, data } = useFetch([]);
 
-  // const handleCheckboxChange = (key, value) => {
-  //   // setSelectedOption(value === selectedOption ? null : value);
-  //   if (value === "") {
-  //     params.delete(key);
-  //     setParams(params);
-  //     return;
-  //   }
-
-  //   const newSearchParams = { ...Object.fromEntries(params), [key]: value };
-  //   setParams(newSearchParams);
-  // };
   useEffect(() => {
     get(
       `/bookingportals/train?search={"source":"${source}","destination":"${destination}"}&day=${day}${
@@ -40,11 +29,20 @@ const TrainsSearchPage = () => {
     );
   }, [params]);
 
+  const handleTrainSearchButtonClick = (searchData) => {
+    setParams({
+      source: searchData.source,
+      destination: searchData.destination,
+      day: searchData.day,
+      date: searchData.date, // Assuming date is part of searchData
+    });
+  };
+
   return (
     <>
       <Stickyheader />
       <div className="trainspagemaindiv">
-        <Traintopsection />
+        <Traintopsection updateSearchParams={handleTrainSearchButtonClick} />
         <div className="trainspage-bottomdiv">
           <div className="filters-div">
             <div className="flitercategory">

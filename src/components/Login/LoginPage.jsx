@@ -81,7 +81,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (authenticated) {
       setShowLogin(false);
-      navigate("/");
+      // navigate("/");
     }
   }, [authenticated]);
 

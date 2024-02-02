@@ -18,8 +18,8 @@
     z-index: 50;
     /* overflow: hidden; */
 }
-.busessearch-headerdiv div{
-    /* border: 1px solid red; */
+/* .busessearch-headerdiv div{
+    border: 1px solid red;
     padding: 4px 9px;
     background: hsla(0,0%,100%,.1);
     margin-right: 20px;
@@ -28,7 +28,7 @@
     width: auto;
     height: auto;
     border-radius: 8px;
-}
+} */
 .busessearch-headerdiv div p:first-child{
     font-size: 12px;
     line-height: 12px;
@@ -58,6 +58,7 @@
     color: #fff;
     width: 159px;
     height: 44px;
+    cursor: pointer;
 }
 
 .busessearch-bottomdiv{
@@ -489,4 +490,38 @@
     cursor: pointer;
     background: rgb(0, 140, 255);
     border: 1px solid rgb(0, 140, 255);
+}
+
+
+.bs-busdetails-div,.bs-departdate-div{
+    cursor: pointer;
+}
+.busdropdown-maindiv{  
+    /* border: 1px solid red; */
+    overflow: hidden;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    height: 400px;
+    width: 314px;
+    background-color: white;
+    overflow: hidden;
+    z-index: 999999;
+    position: absolute;
+    top: 8vh;
+    left: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+    text-align: left;
+    font-size: 16px; 
+}
+.bussearch-datepicker{
+    position: absolute;
+    top: 19vh;
+    left: 29vw;
+    z-index: 1000;
 }

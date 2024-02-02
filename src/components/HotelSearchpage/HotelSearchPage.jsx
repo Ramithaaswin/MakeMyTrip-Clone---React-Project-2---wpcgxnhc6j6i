@@ -11,6 +11,8 @@ import useFetch from "../../Hooks/useFetch";
 const HotelSearchPage = () => {
   const [params, setParams] = useSearchParams();
   const location = params.get("location");
+  const checkindate = params.get("checkindate");
+  const checkoutdate = params.get("checkoutdate");
   const stops = params.get("stops");
   const sort = params.get("sort");
   const departureTime = params.get("departureTime");
@@ -18,7 +20,7 @@ const HotelSearchPage = () => {
 
   useEffect(() => {
     get(
-      `/bookingportals/hotel?search={"location":"${location}"}${
+      `/bookingportals/hotel?search={"location":"${location}","checkindate":"${checkindate}","checkoutdate":"${checkoutdate}"}${
         stops ? `&filter={"stops":"${stops}"}` : ""
       }${sort ? `&sort={"ticketPrice":${sort}}` : ""}${
         departureTime
@@ -27,11 +29,20 @@ const HotelSearchPage = () => {
       }`
     );
   }, [params]);
+
+  const handleHotelSearchBtnClick = (searchData) => {
+    setParams({
+      location: searchData.location,
+      checkindate: searchData.checkindate,
+      checkoutdate: searchData.checkoutdate,
+    });
+  };
+
   return (
     <>
       <Stickyheader />
       <div className="maindiv">
-        <HotelTopSection data={data} />
+        <HotelTopSection updateSearchParams={handleHotelSearchBtnClick} />
         <div className="hotels-sortandsearchdiv">
           <div className="sort-by-div">
             <span className="sort-by-head">SORT BY:</span>

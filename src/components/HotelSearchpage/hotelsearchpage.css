@@ -36,7 +36,7 @@
     align-items: center;
     height: 12px;
 }
-.selecteditem {
+.selecteditem{
     /* border: 2px solid red; */
     font-size: 16px;
     line-height: 16px;
@@ -468,6 +468,20 @@
     margin: 0;
     display: flex;
     align-items: center;
+}
+
+
+.hs-checkin-datepicker{
+    position: fixed;
+    top: 17vh;
+    left: 21vw;
+    z-index: 1000;
+}
+.hs-checkout-datepicker{
+    position: fixed;
+    top: 17vh;
+    left: 30vw;
+    z-index: 1000;
 }
 
 

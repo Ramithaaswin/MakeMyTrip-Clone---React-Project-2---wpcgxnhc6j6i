@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./flightsearchpage.css";
 import { Stickyheader } from "../stickeyheader/Stickyheader";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { Slider } from "@mui/material";
-import { Container } from "@mui/material";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import Flightdetails from "./Flightdetails";
+import { useSearchParams } from "react-router-dom";
 import Flighttopsection from "./Flighttopsection";
 import useFetch from "../../Hooks/useFetch";
 import Flightcard from "./Flightcard";
@@ -19,10 +15,8 @@ const FlightSearchPage = () => {
   const sort = params.get("sort");
   const departureTime = params.get("departureTime");
   const { get, data } = useFetch([]);
-  // const [stops, setSelectedOption] = useState(null);
 
   const handleCheckboxChange = (key, value) => {
-    // setSelectedOption(value === selectedOption ? null : value);
     if (value === "") {
       params.delete(key);
       setParams(params);
@@ -74,6 +68,7 @@ const FlightSearchPage = () => {
                       className="filter-checkbox"
                       type="checkbox"
                       value="option1"
+                      disabled
                     />
                     <p>Non Stop</p>
                   </div>
@@ -84,6 +79,7 @@ const FlightSearchPage = () => {
                       className="filter-checkbox"
                       type="checkbox"
                       value="option2"
+                      disabled
                     />
                     <div className="airline-image-indigo"></div>
                     <p>IndiGo</p>
@@ -91,14 +87,22 @@ const FlightSearchPage = () => {
                 </li>
                 <li>
                   <div>
-                    <input className="filter-checkbox" type="checkbox" />
+                    <input
+                      className="filter-checkbox"
+                      type="checkbox"
+                      disabled
+                    />
                     <div className="airline-image-vistara"></div>
                     <p>Vistara</p>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input className="filter-checkbox" type="checkbox" />
+                    <input
+                      className="filter-checkbox"
+                      type="checkbox"
+                      disabled
+                    />
                     <div className="airline-image-airindia"></div>
                     <p>Air India</p>
                   </div>
@@ -233,42 +237,66 @@ const FlightSearchPage = () => {
               <ul>
                 <li>
                   <div>
-                    <input type="checkbox" className="airline-checkbox" />
+                    <input
+                      type="checkbox"
+                      className="airline-checkbox"
+                      disabled
+                    />
                     <div className="airindia-logo"></div>
                     <p>Air India</p>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input type="checkbox" className="airline-checkbox" />
+                    <input
+                      type="checkbox"
+                      className="airline-checkbox"
+                      disabled
+                    />
                     <div className="airindiaexpress-logo"></div>
                     <p>Air India Express</p>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input type="checkbox" className="airline-checkbox" />
+                    <input
+                      type="checkbox"
+                      className="airline-checkbox"
+                      disabled
+                    />
                     <div className="akasaair-logo"></div>
                     <p>Akasa Air</p>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input type="checkbox" className="airline-checkbox" />
+                    <input
+                      type="checkbox"
+                      className="airline-checkbox"
+                      disabled
+                    />
                     <div className="indigo-logo"></div>
                     <p>IndiGo</p>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input type="checkbox" className="airline-checkbox" />
+                    <input
+                      type="checkbox"
+                      className="airline-checkbox"
+                      disabled
+                    />
                     <div className="spicejet-logo"></div>
                     <p>SpiceJet</p>
                   </div>
                 </li>
                 <li>
                   <div>
-                    <input type="checkbox" className="airline-checkbox" />
+                    <input
+                      type="checkbox"
+                      className="airline-checkbox"
+                      disabled
+                    />
                     <div className="vistara-logo"></div>
                     <p>Vistara</p>
                   </div>

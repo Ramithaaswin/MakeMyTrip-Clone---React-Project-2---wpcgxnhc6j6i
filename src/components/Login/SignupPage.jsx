@@ -84,7 +84,7 @@ const SignupPage = () => {
   useEffect(() => {
     if (authenticated) {
       setShowLogin(false);
-      navigate("/");
+      // navigate("/");
     }
   }, [authenticated]);
 
