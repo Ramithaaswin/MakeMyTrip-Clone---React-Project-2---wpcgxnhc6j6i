@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./trainssearchpage.css";
 import { Stickyheader } from "../../components/stickeyheader/Stickyheader";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Traintopsection from "./Traintopsection";
 import useFetch from "../../Hooks/useFetch";
 import TrainCard from "./TrainCard";
