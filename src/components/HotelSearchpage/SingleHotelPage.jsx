@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "./singlehotelpage.css";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { Stickyheader } from "../stickeyheader/Stickyheader";
@@ -9,10 +9,14 @@ import { TbMathGreater } from "react-icons/tb";
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 import HotelpropertyRules from "./HotelpropertyRules";
+import { useAuthContext } from "../../Context/AuthContext";
+import LoginContext from "../../Context/LoginContext";
 
 const SingleHotelPage = () => {
   const { data, get } = useFetch([]);
   const { id } = useParams();
+  const { authenticated } = useAuthContext();
+  const { showLogin, setShowLogin } = useContext(LoginContext);
 
   useEffect(() => {
     get(`/bookingportals/hotel/${id}`);
@@ -112,10 +116,22 @@ const SingleHotelPage = () => {
                     <p>Per Night</p>
                     <p>₹{room.costPerNight}</p>
                     <p>+₹ {room.costDetails.TaxesAndFees} taxes & fees</p>
-
-                    <Link to={`/hotelcheckout/${data?.data?._id}`}>
-                      <button className="selectroom-btn">SELECT ROOM</button>
-                    </Link>
+                    {authenticated ? (
+                      <Link to={`/hotelcheckout/${data?.data?._id}`}>
+                        <button className="selectroom-btn">SELECT ROOM</button>
+                      </Link>
+                    ) : (
+                      <Link
+                        onClick={(e) => {
+                          if (!authenticated) {
+                            e.preventDefault();
+                            setShowLogin(true);
+                          }
+                        }}
+                      >
+                        <button className="selectroom-btn">SELECT ROOM</button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               ))}

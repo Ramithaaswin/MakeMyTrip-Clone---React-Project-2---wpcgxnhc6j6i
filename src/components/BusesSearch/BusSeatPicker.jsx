@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./busseatpicker.css";
 import { Link, useSearchParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
+import { useAuthContext } from "../../Context/AuthContext";
+import LoginContext from "../../Context/LoginContext";
 
 const BusSeatPicker = ({ id }) => {
   const [params] = useSearchParams();
   const date = decodeURI(params.get("date"));
   const { data, get } = useFetch([]);
   const [selectedSeats, setSelectedSeats] = useState(0);
+  const { authenticated } = useAuthContext();
+  const { showLogin, setShowLogin } = useContext(LoginContext);
 
   const [seats, setSeats] = useState(() =>
     Array(13)
@@ -126,9 +130,27 @@ const BusSeatPicker = ({ id }) => {
               ₹ {data?.data?.fare * selectedSeats}
             </p>
           </div>
-          <Link to={`/buscheckout/${data?.data?._id}`} className="seatpicker-continue-link">
-            <button className="seat-pick-btn">CONTINUE</button>
-          </Link>
+
+          {authenticated ? (
+            <Link
+              to={`/buscheckout/${data?.data?._id}`}
+              className="seatpicker-continue-link"
+            >
+              <button className="seat-pick-btn">CONTINUE</button>
+            </Link>
+          ) : (
+            <Link
+              onClick={(e) => {
+                if (!authenticated) {
+                  e.preventDefault();
+                  setShowLogin(true);
+                }
+              }}
+              className="seatpicker-continue-link"
+            >
+              <button className="seat-pick-btn">CONTINUE</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

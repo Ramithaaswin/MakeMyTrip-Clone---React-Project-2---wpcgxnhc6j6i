@@ -5,6 +5,9 @@ import { IoIosCheckmark } from "react-icons/io";
 import { IoMdPricetag } from "react-icons/io";
 import "./flickity.css";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../../Context/AuthContext";
+import { useContext } from "react";
+import LoginContext from "../../Context/LoginContext";
 const flickityOptions = {
   initialIndex: 0,
   autoPlay: false,
@@ -13,6 +16,9 @@ const flickityOptions = {
   lazyLoad: true,
 };
 const ImageCarousel = ({ data }) => {
+  const { authenticated } = useAuthContext();
+  const { showLogin, setShowLogin } = useContext(LoginContext);
+
   return (
     <>
       <div className="topcarousel-div">
@@ -57,9 +63,23 @@ const ImageCarousel = ({ data }) => {
               {data?.data?.childAndExtraBedPolicy.additionalInfo}
             </h6>
           </div>
-          <Link to={`/hotelcheckout/${data?.data?._id}`}>
-            <button className="primaryBtn">Book Now</button>
-          </Link>
+
+          {authenticated ? (
+            <Link to={`/hotelcheckout/${data?.data?._id}`}>
+              <button className="primaryBtn">Book Now</button>
+            </Link>
+          ) : (
+            <Link
+              onClick={(e) => {
+                if (!authenticated) {
+                  e.preventDefault();
+                  setShowLogin(true);
+                }
+              }}
+            >
+              <button className="primaryBtn">Book Now</button>
+            </Link>
+          )}
         </div>
       </div>
     </>
