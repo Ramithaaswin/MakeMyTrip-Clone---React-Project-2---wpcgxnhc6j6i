@@ -15,21 +15,6 @@
   margin: 0;
   text-align: left;
 }
-
-
-
-.flightsContainer {
-  width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-}
-
-
 .flightBody {
   position: relative;
   /* border: 1px solid red; */
@@ -43,9 +28,66 @@
   min-height: 150px;
   /* border: 1px solid yellow; */
 }
-.footerSpace {
-  padding-bottom: 20px;
+.flightsContainer {
+  /* border: 1px solid red; */
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
 }
+.flightdetails-left-container{
+  padding: 20px;
+  width: 880px;
+  padding: 12px 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.21);
+  border: 1px solid #e9e9e9;
+  background-color: #fff;
+  position: relative;
+}
+.flDetailHdr {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #249995;
+  padding: 0 12px;
+  height: 100px;
+}
+.src-dst-head{
+  text-align: left;
+}
+.flightItenaryWrap {
+  /* border: 1px solid red; */
+  padding: 15px 15px 0;
+}
+.flightItenaryHdr {
+  /* border: 1px solid blue; */
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  height: 56px;
+  gap: 10px;
+}
+.flightItenary {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  background-color: #f4f4f4;
+  padding: 16px;
+  flex-direction: column;
+  position: relative;
+}
+
+
+
 .makeFlex {
   /* border: 1px solid red; */
   display: flex;
@@ -76,14 +118,7 @@
   background-color: #fff;
   position: relative;
 }
-.flDetailHdr {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-left: 4px solid #249995;
-  padding: 0 12px;
-}
+
 .appendTop10 {
   margin-top: 10px !important;
 }
@@ -124,16 +159,8 @@
 .textRight {
   text-align: right;
 }
-.flightItenaryWrap {
-  padding: 15px 15px 0;
-}
-.flightItenaryHdr {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
-}
+
+
 .bgPropertiess {
   background-image: url("../images/airlineimg.png");
   background-repeat: no-repeat;
@@ -166,14 +193,7 @@
   align-items: center;
   height: 18px;
 }
-.flightItenary {
-  display: flex;
-  justify-content: space-between;
-  background-color: #f4f4f4;
-  padding: 16px;
-  flex-direction: column;
-  position: relative;
-}
+
 .flightItineraryDetails {
   display: flex;
   flex-direction: row;
@@ -237,7 +257,7 @@
   margin-left: 40px;
   border: 1px solid #c4c4c4;
   /* border: 1px solid red; */
-  margin-bottom: 120px;
+  margin-bottom: 88px;
 }
 .fareBreakWrapper {
   border-bottom: 1px solid #000;

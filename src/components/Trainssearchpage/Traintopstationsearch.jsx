@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-// import "../Trainswidget/trainswidget.css";
 import "./trainssearchpage.css"
 import OutsideClickHandler from "react-outside-click-handler";
-import Traintopdropdown from "./traintopdropdown";
+import Traintopdropdown from "./Traintopdropdown";
 
 const Traintopstationsearch = ({
   handleSearchData,

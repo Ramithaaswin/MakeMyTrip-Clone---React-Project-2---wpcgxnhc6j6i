@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./busessearch.css";
-import { Stickyheader } from "../stickeyheader/Stickyheader";
+import { Stickyheader } from "../../components/stickeyheader/Stickyheader";
 import BusTopSection from "./BusTopSection";
 import BusCard from "./BusCard";
 import { useSearchParams } from "react-router-dom";
@@ -11,42 +11,40 @@ const BusesSearch = () => {
   const source = params.get("source");
   const destination = params.get("destination");
   const day = params.get("day");
-  const stops = params.get("stops");
+  const type = params.get("type");
   const sort = params.get("sort");
+
   const departureTime = params.get("departureTime");
+  const arrivalTime = params.get("arrivalTime");
   const { get, data } = useFetch([]);
-  const [sortActive, setSortActive] = useState("relevance");
+
+  const handleCheckboxChange = (key, value) => {
+    // setSelectedOption(value === selectedOption ? null : value);
+    if (value === "") {
+      params.delete(key);
+      setParams(params);
+      return;
+    }
+
+    const newSearchParams = { ...Object.fromEntries(params), [key]: value };
+    setParams(newSearchParams);
+  };
 
   useEffect(() => {
     get(
       `/bookingportals/bus?search={"source":"${source}","destination":"${destination}"}&day=${day}&limit=1000${
-        stops ? `&filter={"stops":"${stops}"}` : ""
-      }${sort ? `&sort={"ticketPrice":${sort}}` : ""}${
+        type ? `&filter={"type":"${type}"}` : ""
+      }${sort ? `&sort={"fare":${sort}}` : ""}${
         departureTime
-          ? `&filter={"departureTime":{"$lte":"15:00","$gte":"06:00"}}`
+          ? `&filter={"departureTime":{"$lte":"06:00","$gte":"15:00","$gte":"16:00","$lte":"22:00" }}`
+          : ""
+      }${
+        arrivalTime
+          ? `&filter={"arrivalTime":{"$lte":"06:00","$gte":"15:00","$gte":"16:00","$lte":"22:00" }}`
           : ""
       }`
     );
   }, [params]);
-
-  const handleRelevanceList = () => {
-    setSortActive("relevance");
-  };
-  const handleFastestList = () => {
-    setSortActive("fastest");
-  };
-  const handleCheapestList = () => {
-    setSortActive("cheapest");
-  };
-  const handleRatingList = () => {
-    setSortActive("rating");
-  };
-  const handleArrivalList = () => {
-    setSortActive("arrival");
-  };
-  const handleDepartureList = () => {
-    setSortActive("departure");
-  };
 
   const handleBusSearchButtonClick = (searchData) => {
     setParams({
@@ -68,15 +66,73 @@ const BusesSearch = () => {
           </div>
 
           <div className="AC-filter-div">
+            <p className="ac-filter-div-title">Sort By Price</p>
+            <div className="ac-category-div">
+              <div className="ac-category-subdiv">
+                <input
+                  className="h-5 w-4"
+                  type="checkbox"
+                  checked={sort === "1" ? true : false}
+                  onChange={(e) =>
+                    handleCheckboxChange("sort", e.target.checked ? 1 : "")
+                  }
+                />
+
+                <div className="ac-category">
+                  <p>Low to High</p>
+                </div>
+              </div>
+
+              <div className="ac-category-subdiv">
+                <input
+                  className="h-5 w-4"
+                  type="checkbox"
+                  checked={sort === "-1" ? true : false}
+                  onChange={(e) =>
+                    handleCheckboxChange("sort", e.target.checked ? -1 : "")
+                  }
+                />
+                <div className="non-ac-catogory">
+                  <p>High to Low</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="AC-filter-div">
             <p className="ac-filter-div-title">AC</p>
             <div className="ac-category-div">
-              <div className="ac-category">
-                <div className="ac-img"></div>
-                <p>AC</p>
+              <div className="ac-category-subdiv">
+                <input
+                  className="h-5 w-4"
+                  type="checkbox"
+                  checked={type === "AC" ? true : false}
+                  onChange={(e) =>
+                    handleCheckboxChange("type", e.target.checked ? "AC" : "")
+                  }
+                />
+
+                <div className="ac-category">
+                  <div className="ac-img"></div>
+                  <p>AC</p>
+                </div>
               </div>
-              <div className="non-ac-catogory">
-                <div className="nonac-img"></div>
-                <p>Non AC</p>
+
+              <div className="ac-category-subdiv">
+                <input
+                  className="h-5 w-4"
+                  type="checkbox"
+                  checked={type === "Non-AC" ? true : false}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "type",
+                      e.target.checked ? "Non-AC" : ""
+                    )
+                  }
+                />
+                <div className="non-ac-catogory">
+                  <div className="nonac-img"></div>
+                  <p>Non AC</p>
+                </div>
               </div>
             </div>
           </div>
@@ -84,21 +140,41 @@ const BusesSearch = () => {
           <div className="departure-time-div">
             <p className="departure-time-title">Departure Time</p>
             <div className="departuretime-limit-maindiv">
-              <div>
-                <div className="dt-6amto11pm-img"></div>
-                <p>6 AM to 11 AM</p>
+              <div className="departtime-subdiv">
+                <input
+                  type="checkbox"
+                  className="bs-checkbox h-5 w-4"
+                  checked={departureTime === "6" || departureTime === "15"}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "departureTime",
+                      e.target.checked ? (e.target.checked ? 6 : 15) : ""
+                    )
+                  }
+                />
+
+                <div className="depart-timerangediv">
+                  <div className="dt-11amto6pm-img"></div>
+                  <p>6 AM to 3 PM</p>
+                </div>
               </div>
-              <div>
-                <div className="dt-11amto6pm-img"></div>
-                <p>11 AM to 6 PM</p>
-              </div>
-              <div>
-                <div className="dt-6pmto11pm-img"></div>
-                <p>6 PM to 11 PM</p>
-              </div>
-              <div>
-                <div className="dt-11pmto6am-img"></div>
-                <p>11 PM to 6 AM</p>
+
+              <div className="departtime-subdiv">
+                <input
+                  type="checkbox"
+                  className="bs-checkbox h-5 w-4"
+                  checked={departureTime === "16" || departureTime === "22"}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "departureTime",
+                      e.target.checked ? (e.target.checked ? 16 : 22) : ""
+                    )
+                  }
+                />
+                <div className="depart-timerangediv">
+                  <div className="dt-11pmto6am-img"></div>
+                  <p>4 PM to 10 PM</p>
+                </div>
               </div>
             </div>
           </div>
@@ -106,68 +182,46 @@ const BusesSearch = () => {
           <div className="arrival-time-div">
             <p className="arrival-time-title">Arrival Time</p>
             <div className="arrivaltime-limit-maindiv">
-              <div>
-                <div className="at-6amto11pm-img"></div>
-                <p>6 AM to 11 AM</p>
+              <div className="arrivaltime-subdiv">
+                <input
+                  type="checkbox"
+                  className="bs-checkbox h-5 w-4"
+                  checked={arrivalTime === "6" || arrivalTime === "15"}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "arrivalTime",
+                      e.target.checked ? (e.target.checked ? 6 : 15) : ""
+                    )
+                  }
+                />
+                <div className="arrival-timerangediv">
+                  <div className="at-11amto6pm-img"></div>
+                  <p>6 AM to 3 PM</p>
+                </div>
               </div>
-              <div>
-                <div className="at-11amto6pm-img"></div>
-                <p>11 AM to 6 PM</p>
-              </div>
-              <div>
-                <div className="at-6pmto11pm-img"></div>
-                <p>6 PM to 11 PM</p>
-              </div>
-              <div>
-                <div className="at-11pmto6am-img"></div>
-                <p>11 PM to 6 AM</p>
+
+              <div className="arrivaltime-subdiv">
+                <input
+                  type="checkbox"
+                  className="bs-checkbox h-5 w-4"
+                  checked={arrivalTime === "16" || arrivalTime === "22"}
+                  onChange={(e) =>
+                    handleCheckboxChange(
+                      "arrivalTime",
+                      e.target.checked ? (e.target.checked ? 16 : 22) : ""
+                    )
+                  }
+                />
+                <div className="arrival-timerangediv">
+                  <div className="at-11pmto6am-img"></div>
+                  <p>4 PM to 10 PM</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="bs-bottom-rightdiv">
-          <div className="bus-sortby-div">
-            <p>sort by</p>
-            <ul>
-              <li
-                className={sortActive == "relevance" ? "sortactive" : ""}
-                onClick={handleRelevanceList}
-              >
-                Relevance
-              </li>
-              <li
-                className={sortActive == "fastest" ? "sortactive" : ""}
-                onClick={handleFastestList}
-              >
-                Fastest
-              </li>
-              <li
-                className={sortActive == "cheapest" ? "sortactive" : ""}
-                onClick={handleCheapestList}
-              >
-                Cheapest
-              </li>
-              <li
-                className={sortActive == "rating" ? "sortactive" : ""}
-                onClick={handleRatingList}
-              >
-                Rating
-              </li>
-              <li
-                className={sortActive == "arrival" ? "sortactive" : ""}
-                onClick={handleArrivalList}
-              >
-                Arrival
-              </li>
-              <li
-                className={sortActive == "departure" ? "sortactive" : ""}
-                onClick={handleDepartureList}
-              >
-                Departure
-              </li>
-            </ul>
-          </div>
           <BusCard data={data} />
         </div>
       </div>

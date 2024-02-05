@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import "./hotelsearchpage.css";
-import { Stickyheader } from "../stickeyheader/Stickyheader";
-import hotelspagemap from "../images/hotelspagemap.png";
-
+import { Stickyheader } from "../../components/stickeyheader/Stickyheader";
 import { Link, useSearchParams } from "react-router-dom";
 import HotelTopSection from "./HotelTopSection";
 import HotelCard from "./HotelCard";
@@ -11,20 +9,29 @@ import useFetch from "../../Hooks/useFetch";
 const HotelSearchPage = () => {
   const [params, setParams] = useSearchParams();
   const location = params.get("location");
-  const checkindate = params.get("checkindate");
-  const checkoutdate = params.get("checkoutdate");
-  const stops = params.get("stops");
-  const sort = params.get("sort");
-  const departureTime = params.get("departureTime");
+  const rating = params.get("rating");
+  const roomType = params.get("roomType");
+  const avgCostPerNight = params.get("avgCostPerNight");
   const { get, data } = useFetch([]);
+
+  const handleCheckboxChange = (key, value) => {
+    if (value === "") {
+      params.delete(key);
+      setParams(params);
+      return;
+    }
+
+    const newSearchParams = { ...Object.fromEntries(params), [key]: value };
+    setParams(newSearchParams);
+  };
 
   useEffect(() => {
     get(
-      `/bookingportals/hotel?search={"location":"${location}","checkindate":"${checkindate}","checkoutdate":"${checkoutdate}"}${
-        stops ? `&filter={"stops":"${stops}"}` : ""
-      }${sort ? `&sort={"ticketPrice":${sort}}` : ""}${
-        departureTime
-          ? `&filter={"departureTime":{"$lte":"15:00","$gte":"06:00"}}`
+      `/bookingportals/hotel?search={"location":"${location}"}${
+        rating ? `&filter={"rating":"${rating}"}` : ""
+      }${roomType ? `&filter={"roomType":"${roomType}"}` : ""}${
+        avgCostPerNight
+          ? `&filter={"avgCostPerNight":"${avgCostPerNight}"}`
           : ""
       }`
     );
@@ -42,41 +49,30 @@ const HotelSearchPage = () => {
     <>
       <Stickyheader />
       <div className="maindiv">
-        <HotelTopSection updateSearchParams={handleHotelSearchBtnClick} />
-        <div className="hotels-sortandsearchdiv">
-          <div className="sort-by-div">
-            <span className="sort-by-head">SORT BY:</span>
-            <ul>
-              <li>Popular</li>
-              <li>
-                User Rating<span>(Highest First)</span>
-              </li>
-              <li>
-                Price <span>(Highest First)</span>
-              </li>
-              <li>
-                Price <span>(Lowest First)</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <HotelTopSection
+          data={data}
+          updateSearchParams={handleHotelSearchBtnClick}
+        />
 
+        {/* <Container> */}
         <div className="hotelsearchbottomdiv">
           <div className="applyfilters-sidebar">
-            <div className="exploremapdiv">
-              <button className="exploremap-btn">
-                EXPLORE ON MAP
-                <span className="map-icon"></span>
-              </button>
-              <img className="map-image" src={hotelspagemap} alt="map" />
-            </div>
             <div className="selectfiltersdiv">
               <p className="selectfilters-heading">Select Filters</p>
               <div className="filtercategorydiv">
                 <p className="filtercategory-heading">Price per night</p>
                 <ul>
                   <li>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={avgCostPerNight === "4000" ? true : false}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          "avgCostPerNight",
+                          e.target.checked ? 4000 : ""
+                        )
+                      }
+                    />
                     <p>₹ 0 - ₹ 1500</p>
                   </li>
                   <li>
@@ -111,36 +107,45 @@ const HotelSearchPage = () => {
               </div>
 
               <div className="filtercategorydiv">
-                <p className="filtercategory-heading">Star Category</p>
-                <ul>
-                  <li>
-                    <input type="checkbox" />
-                    <p>3 Star</p>
-                  </li>
-                  <li>
-                    <input type="checkbox" />
-                    <p>4 Star</p>
-                  </li>
-                  <li>
-                    <input type="checkbox" />
-                    <p>5 Star</p>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="filtercategorydiv">
                 <p className="filtercategory-heading">User Rating</p>
                 <ul>
                   <li>
-                    <input type="checkbox" />
-                    <p>Excellent: 4.2+</p>
+                    <input
+                      type="checkbox"
+                      checked={rating === "5" ? true : false}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          "rating",
+                          e.target.checked ? 5 : ""
+                        )
+                      }
+                    />
+                    <p>Excellent: 5</p>
                   </li>
                   <li>
-                    <input type="checkbox" />
-                    <p>Very Good: 3.5+</p>
+                    <input
+                      type="checkbox"
+                      checked={rating === "4" ? true : false}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          "rating",
+                          e.target.checked ? 4 : ""
+                        )
+                      }
+                    />
+                    <p>Very Good: 4</p>
                   </li>
                   <li>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={rating === "3.5" ? true : false}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          "rating",
+                          e.target.checked ? 3.5 : ""
+                        )
+                      }
+                    />
                     <p>Good: 3+</p>
                   </li>
                 </ul>
@@ -150,7 +155,16 @@ const HotelSearchPage = () => {
                 <p className="filtercategory-heading">Room Type</p>
                 <ul>
                   <li>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={roomType === "Double" ? true : false}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          "roomType",
+                          e.target.checked ? "Double" : ""
+                        )
+                      }
+                    />
                     <p>Single</p>
                   </li>
                   <li>
@@ -172,6 +186,7 @@ const HotelSearchPage = () => {
 
           <HotelCard data={data} />
         </div>
+        {/* </Container> */}
       </div>
     </>
   );

@@ -16,7 +16,7 @@ const ConfirmationPopup = ({ setShowConfirmation }) => {
       <div className="confirmation-popup-maindiv">
         <IoCheckmarkCircleOutline size={60} color="rgb(1, 150, 1)" />
         <h2 className="success-msg">Payment Success!!!</h2>
-        <p className="confirm-msg">Your Booking for hotel is confirmed.</p>
+        <p className="confirm-msg">Your Booking confirmed.</p>
         <Link to="/mytrips" className="link-tag">
           <p className="linktomytrip">Check your booking here!!</p>
         </Link>

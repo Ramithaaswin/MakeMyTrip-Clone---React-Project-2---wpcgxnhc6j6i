@@ -12,6 +12,34 @@ const Buscheckoutpage = () => {
   useEffect(() => {
     get(`/bookingportals/bus/${id}`);
   }, [id]);
+
+  const date = new Date();
+  const dateofmmonth = date.getDate();
+  const dateofmmonthNext = date.getDate() + 1;
+  const fullYear = date.getFullYear();
+  const lastTwoDigitsOfYear = fullYear % 100; // Extracting the last two digits
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const nextDay = new Date();
+  nextDay.setDate(date.getDate() + 1);
+
+  const nextDayOfWeek = days[nextDay.getDay()];
+  const day = days[date.getDay()];
+  const month = months[date.getMonth()];
+
   return (
     <>
       <Stickyheader />
@@ -43,7 +71,9 @@ const Buscheckoutpage = () => {
                 <span className="departure-time">
                   {data?.data?.departureTime}
                 </span>
-                <span className="departure-date">10 Jan' 24, Wed</span>
+                <span className="departure-date">
+                  {dateofmmonth} {month}' {lastTwoDigitsOfYear}, {day}
+                </span>
               </div>
 
               <div className="depart-place">
@@ -60,7 +90,10 @@ const Buscheckoutpage = () => {
             <div className="bus-arrival-div">
               <div className="arrival-time-date-div">
                 <span className="arrival-time">{data?.data?.arrivalTime}</span>
-                <span className="arrival-date">10 Jan' 24, Wed</span>
+                <span className="arrival-date">
+                  {dateofmmonthNext} {month}' {lastTwoDigitsOfYear},{" "}
+                  {nextDayOfWeek}
+                </span>
               </div>
               <div className="arrive-place">
                 <span>{data?.data?.destination}</span>
@@ -103,7 +136,7 @@ const Buscheckoutpage = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="fareFooter">
             <p className="totalprice">
               <span className="fontSize16 blackFont">Total Amount</span>

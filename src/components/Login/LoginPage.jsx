@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Context/AuthContext";
 import useFetch from "../../Hooks/useFetch";
 import LoginContext from "../../Context/LoginContext";
+import { toast } from "react-toastify";
 
 const initialData = {
   email: "",
@@ -18,7 +19,8 @@ function validateEmail(email) {
 const LoginPage = () => {
   const [errors, setErrors] = useState(initialData);
   const [formData, setFormData] = useState(initialData);
-  const { data, post, loading } = useFetch(null);
+  const { error: apiError, data, post, loading } = useFetch({});
+  const [loginError, setLoginError] = useState(null);
   const { signUser, authenticated } = useAuthContext();
   const navigate = useNavigate();
   const { showLogin, setShowLogin } = useContext(LoginContext);
@@ -73,15 +75,44 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
+    if (apiError) {
+      if (
+        apiError.status === 401 &&
+        apiError.data?.message === "Incorrect EmailId or Password"
+      ) {
+        setLoginError(apiError.data.message);
+      } else {
+        toast.error("Incorrect EmailId or Password.", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
+
     if (data?.data) {
       signUser(data?.data);
+      toast.success(data.data.status, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
-  }, [data]);
+  }, [apiError, data]);
 
   useEffect(() => {
     if (authenticated) {
       setShowLogin(false);
-      // navigate("/");
     }
   }, [authenticated]);
 

@@ -10,6 +10,32 @@ const Hotelcheckoutpage = () => {
   const { data, get } = useFetch([]);
   const { id } = useParams();
 
+  const date = new Date();
+  const dateofmmonth = date.getDate();
+  const dateofmmonthNext = date.getDate() + 1;
+  const year = date.getFullYear();
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const nextDay = new Date();
+  nextDay.setDate(date.getDate() + 1);
+
+  const nextDayOfWeek = days[nextDay.getDay()];
+  const day = days[date.getDay()];
+  const month = months[date.getMonth()];
+
   useEffect(() => {
     get(`/bookingportals/hotel/${id}`);
   }, [id]);
@@ -62,21 +88,23 @@ const Hotelcheckoutpage = () => {
                     <div className="prptChk__col">
                       <p className="font12 grey2 appendBottom3">CHECK IN</p>
                       <p className="prptChk__date">
-                        Tue
-                        <span className="text-[1.4rem] font-bold">9 Jan</span>
-                        2024
+                        {day}
+                        <span className="text-[1.4rem] font-bold">
+                          {dateofmmonth} {month}
+                        </span>
+                        {year}
                       </p>
-                      <p className="blackText appendTop3">2 PM</p>
                     </div>
                     <div className="prptChk__nights"> 1 Night</div>
                     <div className="prptChk__col last">
                       <p className="font12 grey2 appendBottom3">CHECK OUT</p>
                       <p className="prptChk__date">
-                        Wed
-                        <span className="text-[1.4rem] font-bold">10 Jan</span>
-                        2024
+                        {nextDayOfWeek}
+                        <span className="text-[1.4rem] font-bold">
+                          {dateofmmonthNext} {month}
+                        </span>
+                        {year}
                       </p>
-                      <p className="blackText appendTop3">12 PM</p>
                     </div>
                   </div>
                   <div className="prptChkCont__col undefined">

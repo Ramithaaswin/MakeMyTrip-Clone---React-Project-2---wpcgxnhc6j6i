@@ -22,35 +22,6 @@ const SingleHotelPage = () => {
     <>
       <Stickyheader />
       <div className="singlehotelpage-maindiv">
-        {/* <div className="singlehotel-headerdiv">
-          <div>
-            <p>
-              CITY, AREA OR PROPERTY <MdKeyboardArrowDown size={20} />
-            </p>
-            <p className="selecteditem">Bengaluru</p>
-          </div>
-          <div>
-            <p>
-              CHECK-IN <MdKeyboardArrowDown size={20} />
-            </p>
-            <p className="selecteditem">Wed,6 Dec 2023</p>
-          </div>
-          <div>
-            <p>
-              CHECK-OUT <MdKeyboardArrowDown size={20} />
-            </p>
-            <p className="selecteditem">Tuesday,12 Dec 2023</p>
-          </div>
-          <div>
-            <p>
-              ROOMS & GUESTS
-              <MdKeyboardArrowDown size={20} />
-            </p>
-            <p className="selecteditem">1 Room,2 Adults</p>
-          </div>
-          <button>SEARCH</button>
-        </div> */}
-
         <div className="hoteldetails-maindiv">
           <div className="topnav-text">
             <h6 className="home-text">Home</h6>

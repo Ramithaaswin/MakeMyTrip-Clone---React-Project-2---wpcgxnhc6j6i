@@ -8,6 +8,7 @@ import { useAuthContext } from "../../Context/AuthContext";
 import { SlLogout } from "react-icons/sl";
 import { SlHandbag } from "react-icons/sl";
 import LoginContext from "../../Context/LoginContext";
+import { toast } from "react-toastify";
 
 const TopNavbar = () => {
   // const [showLogin, setShowLogin] = useState(false);
@@ -29,7 +30,16 @@ const TopNavbar = () => {
 
   const handleSignout = () => {
     logoutUser();
-    navigate("/");
+    toast.success("user Loggedout successfully!", {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   return (

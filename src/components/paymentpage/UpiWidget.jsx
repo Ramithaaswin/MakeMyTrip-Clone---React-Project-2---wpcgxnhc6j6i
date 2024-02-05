@@ -9,7 +9,7 @@ const UpiWidget = ({ setShowConfirmation, showConfirmation }) => {
   const [upi, setUpi] = useState("");
   const [isUpiValid, setIsUpiValid] = useState(true);
   const [payBtnActive, setPayBtnActive] = useState(false);
-  const { data, get, post } = useFetch([]);
+  const { loading, data, get, post } = useFetch([]);
   const { id } = useParams();
 
   const validateUpi = () => {
@@ -149,10 +149,10 @@ const UpiWidget = ({ setShowConfirmation, showConfirmation }) => {
               <button
                 className="upi-verifyandpay-btn"
                 onClick={handleShowConfirm}
-                disabled={!payBtnActive}
+                disabled={!payBtnActive || loading}
                 style={{ opacity: !payBtnActive ? 0.5 : 1 }}
               >
-                VERIFY & PAY
+                {loading ? "loading" : "VERIFY & PAY"}
               </button>
               {showConfirmation && (
                 <ConfirmationPopup setShowConfirmation={setShowConfirmation} />

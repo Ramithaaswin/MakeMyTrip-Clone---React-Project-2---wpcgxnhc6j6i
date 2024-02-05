@@ -33,7 +33,7 @@ const FlightSearchPage = () => {
         stops ? `&filter={"stops":"${stops}"}` : ""
       }${sort ? `&sort={"ticketPrice":${sort}}` : ""}${
         departureTime
-          ? `&filter={"departureTime":{"$eq":"17:00","$lte":"15:00","$gte":"06:00"}}`
+          ? `&filter={"departureTime":{"$lte":"15:00","$gte":"06:00"}}`
           : ""
       }`
     );
@@ -193,7 +193,7 @@ const FlightSearchPage = () => {
               </ul>
             </div>
             <div className="popularfilters-div">
-              <p className="popularfilters-head">Departure from Jaipur</p>
+              <p className="popularfilters-head">Departure Time</p>
               <ul>
                 <li>
                   <div>

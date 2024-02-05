@@ -19,6 +19,8 @@ import Hotelcheckoutpage from "./checkoutpages/Hotelcheckoutpage";
 import Buscheckoutpage from "./checkoutpages/Buscheckoutpage";
 import ConfirmationPopup from "./confirmation/ConfirmationPopup";
 import { LoginStateProvider } from "../Context/LoginContext";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [showStickyHeader, setShowStickyHeader] = useState(false);
@@ -45,6 +47,7 @@ function App() {
   return (
     <>
       <LoginStateProvider>
+        <ToastContainer />
         <div className="App">
           {showStickyHeader && <Stickyheader />}
           {/* <TopNavbar /> */}
