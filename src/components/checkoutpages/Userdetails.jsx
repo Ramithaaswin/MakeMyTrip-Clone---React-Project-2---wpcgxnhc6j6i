@@ -17,13 +17,6 @@ const Userdetails = ({ data, keyforTrips }) => {
   const [isPincodeValid, setPincodeValid] = useState(true);
   const [isEmailValid, setEmailValid] = useState(true);
 
-  // const validateMobileNumber = () => {
-  //   if (mobileNo.length !== 9) {
-  //     setMobileNumberValid(false);
-  //   } else {
-  //     setMobileNumberValid(true);
-  //   }
-  // };
 
   const validateMobileNumber = () => {
     const mobileRegex = /^\d{9}$/;
@@ -38,13 +31,7 @@ const Userdetails = ({ data, keyforTrips }) => {
     }
   };
 
-  // const validateEmail = () => {
-  //   if (!email.includes("@")) {
-  //     setEmailValid(false);
-  //   } else {
-  //     setEmailValid(true);
-  //   }
-  // };
+  
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setEmailValid(emailRegex.test(email));
