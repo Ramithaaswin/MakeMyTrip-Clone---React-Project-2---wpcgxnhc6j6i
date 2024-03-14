@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { createContext } from "react";
 
 const authContext = createContext();
+
 const initialData = {
   token: null,
   authenticated: false,
@@ -56,6 +57,7 @@ const AuthContextProvider = ({ children }) => {
       user: data,
     }));
   };
+  
   return (
     <authContext.Provider
       value={{

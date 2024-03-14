@@ -17,12 +17,17 @@ const Userdetails = ({ data, keyforTrips }) => {
   const [isPincodeValid, setPincodeValid] = useState(true);
   const [isEmailValid, setEmailValid] = useState(true);
 
+  // const validateMobileNumber = () => {
+  //   if (mobileNo.length !== 9) {
+  //     setMobileNumberValid(false);
+  //   } else {
+  //     setMobileNumberValid(true);
+  //   }
+  // };
+
   const validateMobileNumber = () => {
-    if (mobileNo.length !== 9) {
-      setMobileNumberValid(false);
-    } else {
-      setMobileNumberValid(true);
-    }
+    const mobileRegex = /^\d{9}$/;
+    setMobileNumberValid(mobileRegex.test(mobileNo));
   };
 
   const validatePincode = () => {
@@ -33,12 +38,16 @@ const Userdetails = ({ data, keyforTrips }) => {
     }
   };
 
+  // const validateEmail = () => {
+  //   if (!email.includes("@")) {
+  //     setEmailValid(false);
+  //   } else {
+  //     setEmailValid(true);
+  //   }
+  // };
   const validateEmail = () => {
-    if (!email.includes("@")) {
-      setEmailValid(false);
-    } else {
-      setEmailValid(true);
-    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailValid(emailRegex.test(email));
   };
 
   const validateAndEnableButton = () => {
@@ -147,7 +156,7 @@ const Userdetails = ({ data, keyforTrips }) => {
               />
               {!isMobileNumberValid && (
                 <p style={{ color: "red", fontSize: "12px" }}>
-                  Mobile number must have 10 digits
+                  Invalid Mobile Number
                 </p>
               )}
             </div>
@@ -167,7 +176,7 @@ const Userdetails = ({ data, keyforTrips }) => {
               />
               {!isEmailValid && (
                 <p style={{ color: "red", fontSize: "12px" }}>
-                  Email should contain "@"
+                  Invalid Email-id
                 </p>
               )}
             </div>

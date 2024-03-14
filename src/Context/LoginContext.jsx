@@ -1,4 +1,3 @@
-// context.js
 import React, { createContext, useState } from "react";
 
 // Define the context

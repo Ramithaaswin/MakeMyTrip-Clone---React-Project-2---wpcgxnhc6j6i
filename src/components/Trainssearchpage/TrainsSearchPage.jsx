@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./trainssearchpage.css";
 import { Stickyheader } from "../../components/stickeyheader/Stickyheader";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Traintopsection from "./Traintopsection";
 import useFetch from "../../Hooks/useFetch";
 import TrainCard from "./TrainCard";
@@ -32,9 +32,7 @@ const TrainsSearchPage = () => {
       `/bookingportals/train?search={"source":"${source}","destination":"${destination}"}&day=${day}${
         trainType ? `&filter={"trainType":"${trainType}"}` : ""
       }${coachType ? `&filter={"coachType":"${coachType}"}` : ""}${
-        departureTime
-          ? `&filter={"departureTime":{"$gte":"18:00"}}`
-          : ""
+        departureTime ? `&filter={"departureTime":{"$gte":"18:00"}}` : ""
       }${arrivalTime ? `&filter={"arrivalTime":{"$lte":"12:00"}}` : ""}`
     );
   }, [params]);
@@ -86,7 +84,7 @@ const TrainsSearchPage = () => {
               </ul>
             </div>
 
-            <div className="flitercategory">
+            {/* <div className="flitercategory">
               <p>Journey Class Filters</p>
               <ul>
                 <li>
@@ -194,7 +192,7 @@ const TrainsSearchPage = () => {
                   <p>Executive Anubhuti - EA</p>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div className="flitercategory">
               <p>Train Types</p>
               <ul>

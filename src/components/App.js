@@ -50,7 +50,6 @@ function App() {
         <ToastContainer />
         <div className="App">
           {showStickyHeader && <Stickyheader />}
-          {/* <TopNavbar /> */}
           <Routes>
             <Route path="/" exact element={<Main />} />
             <Route path="/mytrips" element={<MytripsPage />} />

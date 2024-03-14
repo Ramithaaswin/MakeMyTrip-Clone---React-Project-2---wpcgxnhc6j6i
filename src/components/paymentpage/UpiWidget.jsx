@@ -12,12 +12,10 @@ const UpiWidget = ({ setShowConfirmation, showConfirmation }) => {
   const { loading, data, get, post } = useFetch([]);
   const { id } = useParams();
 
+
   const validateUpi = () => {
-    if (!upi.includes("@")) {
-      setIsUpiValid(false);
-    } else {
-      setIsUpiValid(true);
-    }
+    const upiRegex = /^[0-9]{10}@[a-zA-Z0-9]+$/;
+    setIsUpiValid(upiRegex.test(upi));
   };
 
   const validateAndEnablePay = () => {

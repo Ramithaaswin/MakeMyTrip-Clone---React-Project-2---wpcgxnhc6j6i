@@ -45,6 +45,17 @@ const FlightsWidgetMain = () => {
     airportA: "Jaipur International Airport",
   });
 
+  const [selectedDay, setSelectedDay] = useState(new Date().getDate());
+  const [selectedMonth, setSelectedMonth] = useState(
+    new Date().toLocaleString("default", { month: "short" })
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    new Date().getFullYear().toString().slice(-2)
+  );
+  const [selectedDayName, setSelectedDayName] = useState(
+    new Date().toLocaleDateString("default", { weekday: "long" })
+  );
+
   const handleSwap = () => {
     setLocations((prevLocations) => ({
       from: prevLocations.to,
@@ -78,38 +89,19 @@ const FlightsWidgetMain = () => {
     setShowFlightPopup(!showFightPopup);
   };
 
-  const updateDateDivValues = (date) => {
-    const dday = date.getDate();
-    const dmonth = date.toLocaleString("default", { month: "short" });
-    const dyear = date.getFullYear().toString().slice(-2);
-    const ddayName = date.toLocaleDateString("default", { weekday: "long" });
-    document.getElementById("dday").innerText = dday;
-    document.getElementById("dmonth").innerText = dmonth;
-    document.getElementById("dyear").innerText = dyear;
-    document.getElementById("ddayName").innerText = ddayName;
-  };
-
-  useEffect(() => {
-    updateDateDivValues(new Date());
-  }, []);
-
   const handleDepartureIconClick = () => {
     setShowDepartureDate(!showDepartureDate);
   };
+
   const handleDepartureDate = (date) => {
     setSelectedDepartureDate(date);
     setShowDepartureDate(false);
-    updateDateDivValues(date);
 
-    const dday = date.getDate();
-    const dmonth = date.toLocaleString("default", { month: "short" });
-    const dyear = date.getFullYear().toString().slice(-2);
-    const ddayName = date.toLocaleDateString("default", { weekday: "long" });
-
-    document.getElementById("dday").innerText = dday;
-    document.getElementById("dmonth").innerText = dmonth;
-    document.getElementById("dyear").innerText = dyear;
-    document.getElementById("ddayName").innerText = ddayName;
+    // Update the state with the selected date details
+    setSelectedDay(date.getDate());
+    setSelectedMonth(date.toLocaleString("default", { month: "short" }));
+    setSelectedYear(date.getFullYear().toString().slice(-2));
+    setSelectedDayName(date.toLocaleDateString("default", { weekday: "long" }));
 
     handleSearchData(
       "day",
@@ -152,11 +144,11 @@ const FlightsWidgetMain = () => {
                 <MdKeyboardArrowDown size={20} color="#008cff" />
               </div>
               <p>
-                <span id="dday"></span>
-                <span id="dmonth"></span>
-                <span id="dyear"></span>
+                <span>{selectedDay}</span>
+                <span>{selectedMonth}</span>
+                <span>{selectedYear}</span>
               </p>
-              <p id="ddayName"></p>
+              <p>{selectedDayName}</p>
               {showDepartureDate && (
                 <OutsideClickHandler
                   onOutsideClick={() => setShowDepartureDate(false)}
